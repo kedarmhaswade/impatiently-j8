@@ -9,5 +9,6 @@ public class ArrayEx {
         for (int i : ints)
             System.out.println(i);
         //ints.forEach(System.out::println);
+        System.out.println(ints.getClass());
     }
 }
