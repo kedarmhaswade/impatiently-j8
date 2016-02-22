@@ -10,5 +10,7 @@ public class ArrayEx {
             System.out.println(i);
         //ints.forEach(System.out::println);
         System.out.println(ints.getClass());
+        String[] a = new String[]{};
+        System.out.println(a.getClass());
     }
 }
