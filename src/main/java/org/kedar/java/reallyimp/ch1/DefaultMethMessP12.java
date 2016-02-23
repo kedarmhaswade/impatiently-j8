@@ -1,6 +1,7 @@
 package org.kedar.java.reallyimp.ch1;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
+
+import org.junit.Ignore;
 
 import java.util.Collection;
 

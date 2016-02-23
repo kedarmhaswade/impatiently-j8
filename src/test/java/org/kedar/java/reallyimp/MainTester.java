@@ -17,21 +17,15 @@ import static org.junit.Assert.*;
 public class MainTester {
 
     public static void testMains(List<Class> mainClasses) {
-//        mainClasses = mainClasses.stream().filter(c -> c.getAnnotation(Ignore.class) == null).collect(Collectors.toList());
-        mainClasses.forEach(c -> {
-            try {
+        mainClasses.stream().forEach(c -> {
                 try {
                     Method main = c.getMethod("main", String[].class);
                     main.invoke(null, (Object) null);
                     System.out.println("main invoked on: " + c);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
+                } catch (IllegalAccessException | InvocationTargetException |NoSuchMethodException e) {
+                    throw new RuntimeException(e);
                 }
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            }
         });
+        System.out.println("**** all the tests ran successfully ****");
     }
 }

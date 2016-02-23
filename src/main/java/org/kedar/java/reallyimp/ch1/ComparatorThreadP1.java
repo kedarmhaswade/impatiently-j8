@@ -21,7 +21,7 @@ import java.util.Arrays;
 public class ComparatorThreadP1 {
     public static void main(String[] args) {
         String[] planets = new String[]{"mercury", "venus", "earth", "jupiter", "mars", "saturn", "uranus", "neptune", "pluto"};
-        System.out.println("Calling Thread: " + Thread.currentThread());
+        System.out.println("Calling Thread: " + Thread.currentThread().getName());
         Arrays.sort(planets, (p1, p2) -> {
             // this is the comparison code
             System.out.println("Comparison code runs in: " + Thread.currentThread());
