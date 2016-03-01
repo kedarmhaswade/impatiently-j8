@@ -6,11 +6,10 @@ package tmp;
 public class ArrayEx {
     public static void main(String[] args) {
         int[] ints = new int[]{1, 2, 3};
-        for (int i : ints)
-            System.out.println(i);
-        //ints.forEach(System.out::println);
-        System.out.println(ints.getClass());
-        String[] a = new String[]{};
-        System.out.println(a.getClass());
+        for (int i : ints) {
+            new Thread(() -> {
+                System.out.println(i);
+            }).start();
+        }
     }
 }
