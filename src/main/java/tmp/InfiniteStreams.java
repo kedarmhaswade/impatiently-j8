@@ -1,6 +1,7 @@
 package tmp;
 
 import java.math.BigInteger;
+import java.util.Optional;
 import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 
@@ -13,14 +14,11 @@ public class InfiniteStreams {
     }
 
     public static void main(String[] args) {
-        evens(Integer.MAX_VALUE - 100).limit(100).forEach(System.out::println);
+        evens(1).limit(10).forEach(System.out::println);
         Stream<BigInteger> integers
-                = Stream.iterate(BigInteger.ZERO, new UnaryOperator<BigInteger>() {
-            @Override
-            public BigInteger apply(BigInteger n) {
-                return n.add(BigInteger.ONE);
-            }
-        });
-
+                = Stream.iterate(BigInteger.ZERO, n -> n.add(BigInteger.ONE));
+        integers.limit(10).forEach(System.out::println);
+        Optional<Integer> opt = evens(1).limit(5).reduce(Integer::sum);
+        opt.ifPresent(System.out::println);
     }
 }
