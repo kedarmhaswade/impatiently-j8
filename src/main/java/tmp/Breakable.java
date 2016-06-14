@@ -16,7 +16,7 @@ public class Breakable {
     static {
         try {
             Files.lines(Paths.get("/usr", "share", "dict", "words"))
-                        .filter(s -> s.length() >= 3)
+                        .filter(s -> s.length() >= 2)
                         .map(String::toLowerCase)
                         .filter(s -> s.matches("^[a-zA-Z0-9]*$"))
                         .forEach(s -> dict.add(s));
@@ -27,7 +27,7 @@ public class Breakable {
 
     public static void main(String[] args) {
         List<String> words = new ArrayList<>();
-        if (isBreakable(words, "thiswasreallylong")) {
+        if (isBreakable(words, "tendinitisis")) {
             System.out.println(words);
         } else {
             System.out.println("unbreakable");

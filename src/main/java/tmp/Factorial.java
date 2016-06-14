@@ -7,7 +7,7 @@ import java.util.Arrays;
  */
 public class Factorial {
     static int[] fact(int n) {
-        int[] r = new int[3];
+        int[] r = new int[30];
         r[0] = 1;
         for (int i = 1; i <= n; ++i) {
             int carry = 0;
@@ -29,6 +29,6 @@ public class Factorial {
         System.out.println();
     }
     public static void main(String[] args) {
-        printFactorial(fact(5));
+        printFactorial(fact(10));
     }
 }
