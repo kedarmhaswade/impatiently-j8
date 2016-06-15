@@ -42,7 +42,7 @@ public class ConnectedGraphTraversal {
     static void traverse(Set<Vertex> graph) {
         int sum = graph.stream().mapToInt(v -> v.neighbors.size()).sum();
         Vertex from = getRandomStartingVertex(graph);
-        System.out.println("start: " + from + ", remaining: " + graph.size());
+        System.out.println("start: " + from);
         Vertex to = null;
         int i = 0;
         while (i < sum) {
@@ -78,7 +78,8 @@ public class ConnectedGraphTraversal {
     }
 
     public static void main(String[] args) {
-        StringReader sr = new StringReader("1 2,3,5\n2 1,4,5\n3 1,4\n4 2,3\n5 1,2\n");
+        StringReader sr = new StringReader("1 3,4,6\n2 3,5,6\n3 1,2\n4 1,5,6\n5 2,4,6\n6 1,2,4,5");
+//        StringReader sr = new StringReader("1 2,3,5\n2 1,4,5\n3 1,4\n4 2,3\n5 1,2\n");
 //        StringReader sr = new StringReader("1 2,3,4\n2 1,3,4\n3 1,2,4\n4 1,2,3\n");
         Set<Vertex> g = createGraph(new BufferedReader(sr).lines());
         traverse(g);
