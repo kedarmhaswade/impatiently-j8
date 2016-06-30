@@ -75,7 +75,7 @@ public final class Elevator {
     }
 
     public static void main(String[] args) {
-        Elevator e = new Elevator(50, -2, 4, 9);
-        System.out.println(e.reach(14, 41));
+        Elevator e = new Elevator(1000, 2, -4);
+        System.out.println(e.reach(1, 2));
     }
 }

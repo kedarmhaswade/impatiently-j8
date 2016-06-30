@@ -58,7 +58,7 @@ public class KnightMoveComponent {
     private static final class Vertex {
         final String position;
         final Set<Vertex> edges = new LinkedHashSet<>();
-        Vertex component = null;
+        Vertex component = null; // this initialization is essential for the algorithm to work
         Vertex(String position) {
             this.position = position;
         }
@@ -82,7 +82,7 @@ public class KnightMoveComponent {
         }
     }
     public static void main(String[] args) {
-        List<Vertex> knightGraph = createKnightGraph(8);
+        List<Vertex> knightGraph = createKnightGraph(5);
         Set<Vertex> components = getComponents(knightGraph);
         System.out.println("number of getComponents: " + components.size());
         System.out.println(components);
@@ -148,6 +148,7 @@ public class KnightMoveComponent {
                 }
                 g.add(v);
             }
+//        System.out.println(g);
         return g;
     }
 }
