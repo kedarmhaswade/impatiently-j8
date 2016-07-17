@@ -44,15 +44,15 @@ public class AlmostSorted {
             if ((((inv2i + 1) < a.length && a[inv1i] < a[inv2i + 1]) || (inv2i == a.length - 1)) &&
                     (a[inv2i] > a[inv1i - 1])) {
                 indexes.add(inv1i + 1);
-                indexes.add(inv2i + 2);
+                indexes.add(inv2i + 1);
                 return Sorted.swap;
             } else {
                 return Sorted.no;
             }
         } else if (ninv == (inv2i - inv1i)) {
             // possible reverse
-            if ((((inv2i + 1) < a.length && a[inv1i] < a[inv2i + 1]) || (inv2i == a.length - 1)) &&
-                    (a[inv2i] > a[inv1i - 1])) {
+            if (((inv2i == a.length - 1) || (a[inv1i] < a[inv2i + 1]))
+                    && (inv1i == 0 || (a[inv2i] > a[inv1i - 1]))) { // surely reverse
                 indexes.add(inv1i + 1);
                 indexes.add(inv2i + 1);
                 return Sorted.reverse;

@@ -30,7 +30,7 @@ public class AlmostSortedTest {
         Sorted state = isSorted(a, indexes);
         assertEquals(Sorted.swap, state);
         assertEquals(2, (int) indexes.get(0));
-        assertEquals(5, (int) indexes.get(1));
+        assertEquals(4, (int) indexes.get(1));
     }
 
     @Test
@@ -68,4 +68,28 @@ public class AlmostSortedTest {
         assertEquals(7, (int) indexes.get(1));
     }
 
+    @Test
+    public void testRandomSwapLarge() throws Exception {
+        int[] a = new int[1_000_000];
+        for (int i = 0; i < a.length; i++)
+            a[i] = i;
+        int tmp = a[10];
+        a[10] = a[100_000];
+        a[100_000] = tmp;
+        List<Integer> indexes = new ArrayList<>(2);
+        Sorted state = isSorted(a, indexes);
+        assertEquals(Sorted.swap, state);
+        assertEquals(11, (int) indexes.get(0));
+        assertEquals(100_001, (int) indexes.get(1));
+    }
+
+    @Test
+    public void reverseSorted() {
+        int[] a = new int[1_000_000];
+        for (int i = 0; i < a.length; i++)
+            a[i] = a.length - i - 1;
+        List<Integer> indexes = new ArrayList<>(2);
+        Sorted state = isSorted(a, indexes);
+        assertEquals(Sorted.reverse, state);
+    }
 }
