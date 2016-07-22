@@ -26,8 +26,8 @@ public class TopK {
         int k = Integer.parseInt(args[0]);
         PriorityQueue<Entry<String, Long>> minHeap =
                 new PriorityQueue<>(k, (a, b) -> Long.compare(a.getValue(), b.getValue()));
-        Set<Entry<String, Long>> words = words(args[1]);
-        Iterator<Entry<String, Long>> iter = words.iterator();
+        Set<Entry<String, Long>> histo = words(args[1]); // this is the histogram of words
+        Iterator<Entry<String, Long>> iter = histo.iterator();
         for (int i = 0; i < k; i++) {
             if (iter.hasNext()) {
                 Entry<String, Long> word = iter.next();
@@ -39,7 +39,7 @@ public class TopK {
             }
         }
         // since there are more words we remove and add, if we are sure
-        for (Entry<String, Long> e : words) {
+        for (Entry<String, Long> e : histo) {
             Entry<String, Long> head = minHeap.peek();
             if (Long.compare(head.getValue(), e.getValue()) < 0) { // head is smaller than e
                 minHeap.remove();
