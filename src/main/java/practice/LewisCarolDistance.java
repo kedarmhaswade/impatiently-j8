@@ -15,7 +15,7 @@ public class LewisCarolDistance {
 
     static {
         try {
-            try (BufferedReader br = new BufferedReader(new FileReader("/usr/share/dict/words"))) {
+            try (BufferedReader br = new BufferedReader(new FileReader("/tmp/words.txt"))) {
                 dict = br.lines().map(String::toLowerCase).collect(Collectors.toSet());
             }
         } catch (IOException e) {
@@ -24,12 +24,36 @@ public class LewisCarolDistance {
     }
 
     public static void main(String[] args) {
+//        byronTest();
         StringBuilder buf = new StringBuilder(100);
         int ld = getLewisCarolDistance(args[0].toLowerCase(), args[1].toLowerCase(), buf);
         if (ld != -1) {
             System.out.println("lcd: "+ ld);
         } else {
             System.out.println("words are not equivalent");
+        }
+    }
+
+    private static void byronTest() {
+        int i = 1;
+        Set<String> seen = new HashSet<>(100);
+        StringBuilder buf = new StringBuilder(100);
+        List<String> l8 = dict.stream().filter(s -> s.length() == 8).collect(Collectors.toList());
+        int len = l8.size();
+        System.out.println("len: " + len);
+        Random r = new Random(System.currentTimeMillis());
+        while (i <= 100) {
+            String w1 = l8.get(r.nextInt(len));
+            while (seen.contains(w1)) {
+                w1 = l8.get(r.nextInt(len));
+            }
+            seen.add(w1);
+            String w2 = l8.get(r.nextInt(len));
+//            System.out.println(w1 + ", " + w2);
+            if (getLewisCarolDistance(w1, w2, buf) != -1) {
+                System.out.println(buf.toString());
+                i += 1;
+            }
         }
     }
 
