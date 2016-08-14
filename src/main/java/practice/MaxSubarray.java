@@ -9,7 +9,7 @@ package practice;
  */
 public class MaxSubarray {
     /*
-    This is a famous DP problem which could be solved using iterative improvement. The following implementation
+    This is a famous problem which could be solved using iterative improvement. The following implementation
     uses dynamic programming.
      */
     static long value(int[] a) {

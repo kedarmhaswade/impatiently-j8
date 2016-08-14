@@ -22,7 +22,7 @@ public class BitwiseExamples {
      *     </ol>
      *     This is much faster than the method that shifts x one bit at a time n times, where n is the word-length.
      * </p>
-     * @param x an integer
+     * @param x a long integer
      * @return number of set bits in x's two's complement notation
      */
     public static int popCount(long x) {
@@ -63,5 +63,22 @@ public class BitwiseExamples {
      */
     public static boolean isPowerOf2(long x) {
         return x > 0 && x == (x & ~(x-1));
+    }
+
+    public static short parityUnsetRightmostOne(long x) {
+        short result = 0;
+        while (x != 0) {
+            x = x & (x - 1); // unset the rightmost 1 bit
+            result ^= 1; // Xor with 1 = modulo 2 addition
+        }
+        return result;
+    }
+    public static short parityLookup(long x, int[] table) {
+        // assumes that table has 2^16 entries; table[i] = parity of i
+        int MASK = 0xFFFF;
+        return (short) (table[((int) (x & MASK))]
+                     ^ table[((int) (x >>> 16 & MASK))]
+                     ^ table[((int) (x >>> 32 & MASK))]
+                     ^ table[((int) (x >>> 48 & MASK))]);
     }
 }

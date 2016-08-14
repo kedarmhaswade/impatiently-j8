@@ -17,5 +17,6 @@ public class MaxSubarrayTest {
         assertEquals(4L, value(new int[]{-1, -2, -3, 4, -10}));
         assertEquals(6L, value(new int[]{-2, 4, -3, 5, -10}));
         assertEquals(5L, value(new int[]{-1, 1, -2, 2, -3, 3, -4, 4, -5, 5}));
+        assertEquals(1479L, value(new int[]{904, 40, 523, 12, -335, -385, -124, 481, -31}));
     }
 }
