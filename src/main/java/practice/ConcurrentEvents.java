@@ -77,11 +77,11 @@ public class ConcurrentEvents {
             if (ep.isStart) {
                 num += 1;
                 max = Math.max(num, max); // we could also take a snapshot of events
-                System.out.println("inc current num: " + num + ", current max: " + max);
+//                System.out.println("inc current num: " + num + ", current max: " + max);
             } else {
                 assert ! ep.isStart;
                 num -= 1;
-                System.out.println("dec current num: " + num + ", current max: " + max);
+//                System.out.println("dec current num: " + num + ", current max: " + max);
             }
         }
         return max;
