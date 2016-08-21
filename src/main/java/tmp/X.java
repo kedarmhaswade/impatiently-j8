@@ -1,5 +1,6 @@
 package tmp;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,7 +9,13 @@ import java.util.List;
  */
 public class X {
     public static void main(String[] args) {
-        List<Integer> l = Arrays.asList(1, 2, 3);
-        l.add(5);
+        int cap = 10;
+        List<Integer> xs = new ArrayList<>(cap);
+        for (int i = 0; i < cap; i++)
+            xs.add(0);
+        System.out.println(xs);
+        xs = Arrays.asList(1, 2, 3);
+        xs.set(0, 100);
+        System.out.println(xs);
     }
 }
