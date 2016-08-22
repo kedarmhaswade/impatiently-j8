@@ -60,21 +60,4 @@ public class Inversions {
         arraycopy(b, 0, a, lowInc, len);
         return ninv;
     }
-    static void print(int[] a) {
-        int length = a.length;
-        if (length == 0) {
-            System.out.println("[]");
-            return;
-        }
-        StringBuilder b = new StringBuilder("[");
-        for (int i = 0; ;i++) {
-            b.append(a[i]);
-            if (i == length - 1) {
-                b.append("]");
-                break;
-            }
-            b.append(", ");
-        }
-        System.out.println(b.toString());
-    }
 }

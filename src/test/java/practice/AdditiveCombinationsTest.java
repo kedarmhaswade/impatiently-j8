@@ -32,5 +32,11 @@ public class AdditiveCombinationsTest {
         assertEquals(1185739173L, (long) countBottomUp(set, 222));
         assertEquals(1185739173L, (long) countTopDown(set, 222));
     }
+    @Test
+    public void testCount4() throws Exception {
+        Set<Integer> set = Sets.newHashSet(2, 3, 7);
+        assertEquals(18L, (long) countBottomUp(set, 12));
+        assertEquals(18L, (long) countTopDown(set, 12));
+    }
 
 }

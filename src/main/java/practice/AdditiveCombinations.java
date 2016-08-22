@@ -1,9 +1,6 @@
 package practice;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * <p>
@@ -58,6 +55,9 @@ public class AdditiveCombinations {
         Integer[] nWays = new Integer[score + 1];
         return countTopDown(points, nWays, score);
     }
+    static int countTopDown(Integer[] ps, int score) {
+        return countTopDown(new HashSet<>(Arrays.asList(ps)), score);
+    }
     static int countTopDown(int[] points, Integer[] nWays, int score) {
         if (nWays[score] != null)
             return nWays[score];
@@ -67,7 +67,7 @@ public class AdditiveCombinations {
             if (prevScore < 0)
                 break; // sorted points, so other (higher) values can be skipped
             if (prevScore == 0) {
-                total += 1;
+                total += 1; // this shot at current score, takes us to the given final score
                 continue;
             }
             Integer nWaysPrevScore = nWays[prevScore];
