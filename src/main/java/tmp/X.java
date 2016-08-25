@@ -17,5 +17,9 @@ public class X {
         xs = Arrays.asList(1, 2, 3);
         xs.set(0, 100);
         System.out.println(xs);
+        @SuppressWarnings("unchecked")
+        List<String>[] lol = new List[4];
+        lol[0] = Arrays.asList("a", "b", "c");
+        List<String> l = Arrays.asList("a", "b");
     }
 }

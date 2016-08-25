@@ -63,24 +63,24 @@ public final class BinarySearch {
             }
         }
         // we either ran into an element that is larger or we ran out of the list at index 2^(p) - 1;
-        int low = 1 << (p - 1);
-        int high = (1 << p) - 2;
-        int mid;
+        int low = 1 << (p - 1);  // low index is inclusive
+        int high = (1 << p) - 2; // high index is also inclusive
         while (low <= high) {
-            mid = (low + high) >>> 1;
+            int mid = (low + high) >>> 1;
             try {
-                if (list.get(mid).compareTo(key) == 0) {
+                E midVal = list.get(mid);
+                if (midVal.compareTo(key) == 0) {
                     return mid;
-                } else if (list.get(mid).compareTo(key) < 0) {
+                } else if (midVal.compareTo(key) < 0) {
                     low = mid + 1;
                 } else {
-                    assert list.get(mid).compareTo(key) > 0;
+                    assert midVal.compareTo(key) > 0;
                     high = mid - 1;
                 }
             } catch (IndexOutOfBoundsException e) {
                 high = mid - 1;
             }
         }
-        return -low;
+        return - (low + 1);
     }
 }
