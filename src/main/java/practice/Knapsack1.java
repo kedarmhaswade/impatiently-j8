@@ -7,26 +7,29 @@ package practice;
  *     value vmax that we can have by choosing the subset of items such that their weight is &le;= a constraint wmax.
  * </p>
  * <p>
- *     We use the standard DP formulation with a space optimization. We need O(wmax) space and O(n.wmax) time.
+ *     We use the standard DP formulation with a space optimization. We need O(n.capacity) space and O(n.capacity) time.
+ *     An optimization can be to reduce the space requirements to O(capacity).
  * </p>
  * Created by kmhaswade on 8/24/16.
  */
 public class Knapsack1 {
 
-    static int maxValue(int[] w, int[] v, int wmax) {
-        int[] values = new int[wmax + 1];
+    static int maxValue(int[] w, int[] v, int capacity) {
         int length = w.length;
-        System.out.println("length: " + length);
         assert length == v.length;
+        int[][] values = new int[length][capacity + 1];
         for (int i = 0; i < length; i++) {
-            for (int j = 0; j <= wmax; j++) {
-                if (w[i] <= wmax) {
-                    int vWithI = j - w[i] < 0 ? 0 : values[j - w[i]] + v[i];
-                    int wWithoutI = values[j];
-                    values[j] = Math.max(vWithI, wWithoutI);
+            for (int j = 0; j <= capacity; j++) {
+                if (w[i] <= j) { // only now may we pick the ith item
+                    int vWithI = i - 1 < 0 ? v[i] : values[i - 1][j - w[i]] + v[i];
+                    int wWithoutI = i - 1 < 0 ? 0 : values[i-1][j];
+                    values[i][j] = Math.max(vWithI, wWithoutI);
+                } else {
+                    values[i][j] = i - 1 < 0 ? 0 : values[i-1][j];
                 }
             }
+//            Utils.print(values[i]);
         }
-        return values[wmax];
+        return values[length - 1][capacity];
     }
 }

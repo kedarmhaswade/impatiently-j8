@@ -34,7 +34,7 @@ public class MaxProduct {
         }
         long max = Long.MIN_VALUE;
         for (int i = 0; i < length; i++) {
-            max = Math.max(max, lp[i]* rp[i]);
+            max = Math.max(max, lp[i] * rp[i]);
         }
         return max;
     }

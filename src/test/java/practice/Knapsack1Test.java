@@ -15,5 +15,8 @@ public class Knapsack1Test {
         int[] v = new int[] {60, 50, 70, 30};
         int[] w = new int[] {5, 3, 4, 2};
         assertEquals(80L, maxValue(w, v, 5));
+        v = new int[] {65, 35, 245, 195};
+        w = new int[] {20, 8, 60, 55};
+        System.out.println(maxValue(w, v, 130));
     }
 }
