@@ -32,4 +32,29 @@ public class Knapsack1 {
         }
         return values[length - 1][capacity];
     }
+
+    static int maxValueOptimized(int[] w, int[] v, int capacity) {
+        int nItems = w.length;
+        assert nItems == v.length;
+        int[] values = new int[capacity + 1];
+        for (int j = 0; j <= capacity; j++) { // special treatment for the first item
+            if (j >= w[0])
+                values[j] = v[0];
+        }
+        // now treat the remaining items, preserving the recurrence
+        for (int i = 1; i < nItems; i++) {
+            int[] newValues = new int[capacity + 1];
+            for (int j = 0; j <= capacity; j++) {
+                if (j >= w[i]) {
+                    int vWithI = values[j - w[i]] + v[i];
+                    int vWithoutI = values[j];
+                    newValues[j] = Math.max(vWithI, vWithoutI);
+                } else {
+                    newValues[j] = values[j];
+                }
+            }
+            values = newValues;
+        }
+        return values[capacity];
+    }
 }
