@@ -62,7 +62,7 @@ public class BitwiseExamples {
      * .MIN_VALUE)
      */
     public static boolean isPowerOf2(long x) {
-        return x > 0 && x == (x & ~(x-1));
+        return x > 0 && ((x & (x - 1)) == 0);
     }
 
     public static short parityUnsetRightmostOne(long x) {
