@@ -22,7 +22,8 @@ public class StockStrategy2 {
                 bi = pbi;
             }
             if (p[i] < p[pbi]) {
-                pbi = i;
+                if (p[pbi] > p[i])
+                    pbi = i;
             }
         }
         if (maxp > 0) {
