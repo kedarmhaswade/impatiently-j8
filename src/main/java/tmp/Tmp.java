@@ -26,6 +26,9 @@ public class Tmp {
 ////        System.out.println("" + Character.valueOf((char)(65 + r.nextInt(26))) + Character.valueOf((char)(65 + r.nextInt(26))));
 //    }
     public static void main(String[] args) {
+        System.out.println(Integer.parseInt("01"));
+        System.out.println("C is the first and the".replace(' ', '\0').length());
+        System.out.println("letter of this sentence".replace(' ', '\0').length());
         Object l4 = Arrays.asList(new String[]{"a", "b", "c"});
         System.out.println("l4 " + l4);
         System.out.println("String.class.isInstance(l4.get(0)) : " + String.class.isInstance(((List<String[]>) l4).get(0)));

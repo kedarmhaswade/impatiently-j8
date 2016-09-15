@@ -82,4 +82,24 @@ public class Utils {
     public static void print(long[][] a2) {
         System.out.println(toStringArray(a2));
     }
+
+    // utility classes
+    public static class BinTreeNode<T> {
+        final T key;
+        public BinTreeNode<T> left; // mutable!
+        public BinTreeNode<T> right; // mutable!
+        public BinTreeNode(T key) {
+            this.key = key;
+        }
+    }
+    public static class BinTreeNodeWithParent<T> extends BinTreeNode<T> {
+        public BinTreeNode<T> parent; // mutable!
+        public BinTreeNodeWithParent(T key, BinTreeNodeWithParent<T> parent) {
+            super(key);
+            this.parent = parent;
+        }
+        public BinTreeNodeWithParent(T key) {
+            this(key, null);
+        }
+    }
 }

@@ -11,22 +11,7 @@ import java.util.Arrays;
 public class ArrayRotate {
 
     static void right(int[] a, int k) {
-        int n = a.length;
-        k %= n; // modular arithmetic
-        if (k == 0)
-            return;
-        int ii = 0; // final index
-        int j;
-        int i = 0;
-        int t = a[i];
-        while ((j = (i + k) % n) != ii) {
-            //swap a[j] and t
-            int tmp = t;
-            t = a[j];
-            a[j] = tmp;
-            i = j;
-        }
-        a[j] = t;
+        // Bentley algorithm
     }
 
     public static void main(String[] args) {
