@@ -1,6 +1,6 @@
 package tmp;
 
-/** Solution to: http://stackoverflow.com/questions/35737102/difference-between-two-recursive-methods
+/** SpiralMatrixSolution to: http://stackoverflow.com/questions/35737102/difference-between-two-recursive-methods
  * Created by kmhaswade on 3/1/16.
  */
 public class ReflectBinaryTree {

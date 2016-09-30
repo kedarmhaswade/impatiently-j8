@@ -2,11 +2,10 @@ package practice;
 
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertSame;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static practice.SLL.ListNode;
-import static practice.SLL.reverse;
+import static org.junit.Assert.assertSame;
+import static practice.SLL.*;
 
 /**
  * Created by kmhaswade on 7/31/16.
@@ -42,5 +41,32 @@ public class SLLTest {
         assertSame(r.next.next.next.next, one);
         assertNull(one.next);
     }
-
+    @Test
+    public void testAddMsdFirstEqualNumberOfDigits() {
+        ListNode<Integer> nine = new ListNode<>(9);
+        ListNode<Integer> eight = new ListNode<>(8);
+        ListNode<Integer> sum = addMsdFirst(nine, eight);
+        assertEquals(1L, (long) sum.key);
+        assertEquals(7L, (long) sum.next.key);
+        assertNull(sum.next.next);
+    }
+    @Test
+    public void testAddMsdFirst() {
+//        ListNode<Integer> oneThreeFourNine = new ListNode<>(9);
+//        oneThreeFourNine = new ListNode<>(4, oneThreeFourNine);
+//        oneThreeFourNine = new ListNode<>(3, oneThreeFourNine);
+//        oneThreeFourNine = new ListNode<>(1, oneThreeFourNine);
+//        ListNode<Integer> threeNineEight = new ListNode<>(8);
+//        threeNineEight = new ListNode<>(9, threeNineEight);
+//        threeNineEight = new ListNode<>(3, threeNineEight);
+//        ListNode<Integer> sum = addMsdFirst(oneThreeFourNine, threeNineEight);
+//        while (sum != null) {
+//            System.out.println(sum.key);
+//            sum = sum.next;
+//        }
+//        assertEquals(1L, (long) sum.key);
+//        assertEquals(8L, (long) sum.next.key);
+//        assertEquals(3L, (long) sum.next.next.key);
+//        assertEquals(7L, (long) sum.next.next.key);
+    }
 }
