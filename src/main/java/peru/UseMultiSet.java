@@ -7,7 +7,7 @@ import com.google.common.collect.Sets;
 /**
  * Created by kmhaswade on 5/29/16.
  */
-public class UseMultiset {
+public class UseMultiSet {
     public static void main(String[] args) {
         Multiset<Integer> mset = HashMultiset.create();
         mset.add(2);
