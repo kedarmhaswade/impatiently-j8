@@ -52,4 +52,10 @@ public class PermutationsTest {
         assertEquals(asList(1, 6, 5, 3), previousPermutation(asList(3, 1, 5, 6)));
         assertEquals(asList(3, 5, 6, 1), previousPermutation(asList(3, 6, 1, 5)));
     }
+    @Test
+    public void testPermutationsRecur() {
+        List<Integer> src = asList(1, 1, 3);
+        List<Integer> dest = new ArrayList<>();
+        generatePermRecur(dest, src, list -> System.out.println(list));
+    }
 }
