@@ -1,5 +1,6 @@
 package practice;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
@@ -17,6 +18,32 @@ import static java.util.Collections.*;
  * Created by kmhaswade on 8/6/16.
  */
 public class Permutations {
+
+    /**
+     * <p>A recursive implementation of finding permutations of elements in the given list. This takes into account
+     * duplicates as well. The given list (src) is assumed to be sorted, if its elements are comparable.
+     * </p>
+     * @param dest the permutation
+     */
+    public static <T> void generatePermRecur(List<T> dest, List<T> src, Consumer<List<T>> sink) {
+        if (src.isEmpty()) {
+            sink.accept(dest); // the base case, dest is a perm of src
+        } else {
+            List<T> copy = new ArrayList<T>(dest);
+            int len = src.size();
+            for (int i = 0; i < len; i++) {
+                if (i == 0 || !src.get(i).equals(src.get(i - 1))) {
+                    dest.add(src.get(i));
+                    List<T> combined = new ArrayList<T>(len - 1);
+                    combined.addAll(src.subList(0, i));
+                    combined.addAll(src.subList(i + 1, len));
+                    generatePermRecur(dest, combined, sink);
+                    dest.clear();
+                    dest.addAll(copy);
+                }
+            }
+        }
+    }
 
     public static <T> void printPermutations(List<T> sequence) {
         generatePermutationsUsingBasicExchangeNetwork(sequence, t -> System.out.println(t));
@@ -56,7 +83,8 @@ public class Permutations {
         int fi = 0;
         for (int i = 1; i <= fact; i++) {
             consumer.accept(sequence);
-            swap(sequence, fi, fi + 1);
+            if (! sequence.get(fi).equals(sequence.get(fi + 1))) // swap only if the elements are different
+                swap(sequence, fi, fi + 1);
             fi = (fi + 1) % (size - 1);
         }
     }
