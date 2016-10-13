@@ -18,13 +18,23 @@ public class PermutationsTest {
     @Test
     public void testGeneratePermutationsUsingBasicExchangeNetwork() throws Exception {
         List<Integer> seq = asList(1, 5, 10);
-        Set<List<Integer>> set = new HashSet<>((int) f(seq.size()));
+        final Set<List<Integer>> set = new HashSet<>((int) f(seq.size()));
         set.add(seq);
         set.add(asList(5, 1, 10));
         set.add(asList(5, 10, 1));
         set.add(asList(10, 5, 1));
         set.add(asList(10, 1, 5));
         set.add(asList(1, 10, 5));
+        generatePermutationsUsingBasicExchangeNetwork(seq, next -> {
+            System.out.println(next);
+            assertTrue(set.contains(next));
+            set.remove(next);
+        });
+        assertTrue(set.isEmpty());
+
+        seq = asList(1, 2);
+        set.add(seq);
+        set.add(asList(2, 1));
         generatePermutationsUsingBasicExchangeNetwork(seq, next -> {
             System.out.println(next);
             assertTrue(set.contains(next));
