@@ -1,5 +1,7 @@
 package practice;
 
+import java.util.Random;
+
 /**
  * Created by kmhaswade on 8/22/16.
  */
@@ -81,6 +83,16 @@ public class Utils {
     }
     public static void print(long[][] a2) {
         System.out.println(toStringArray(a2));
+    }
+
+    public static String randomString(int length, String alphabet, long seed) {
+        StringBuilder sb = new StringBuilder(length);
+        int nLetters = alphabet.length();
+        Random r = new Random(seed);
+        for (int i = 0; i < length; i++) {
+            sb.append(alphabet.charAt(r.nextInt(nLetters)));
+        }
+        return sb.toString();
     }
 
     // utility classes
