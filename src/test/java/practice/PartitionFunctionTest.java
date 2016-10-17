@@ -18,7 +18,7 @@ public class PartitionFunctionTest {
     public void nonIncreasingTest() throws Exception {
         int n = 10;
         LinkedList<Integer> rem = new LinkedList<>();
-        List<List<Integer>> acc = new ArrayList<>(8);
+        List<List<Integer>> acc = new ArrayList<>(64);
         nonIncreasing(n, rem, acc);
         assertEquals(42L, acc.size());
         acc.forEach(list -> assertEquals(n, (long) list.stream().reduce(Integer::sum).get())); // deliberate non-use of ifPresent
