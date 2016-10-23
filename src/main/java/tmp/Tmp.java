@@ -26,6 +26,7 @@ public class Tmp {
 ////        System.out.println("" + Character.valueOf((char)(65 + r.nextInt(26))) + Character.valueOf((char)(65 + r.nextInt(26))));
 //    }
     public static void main(String[] args) {
+        System.out.println(268435457 * 15);
         Map<String, List<Integer>> map = new HashMap<>();
         map.put("a", asList(1, 2, 3));
         System.out.println(map);

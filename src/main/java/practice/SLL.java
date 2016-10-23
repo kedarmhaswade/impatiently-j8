@@ -18,11 +18,30 @@ public class SLL {
             this.key = key;
             this.next = next;
         }
+        ListNode<T> add(T key) {
+            final ListNode<T> curr = new ListNode<>(key);
+            this.next = curr;
+            return curr;
+        }
+    }
+    public static <T> String toString(ListNode<T> n) {
+        if (n == null)
+            return "null";
+        StringBuilder b = new StringBuilder();
+        ListNode<T> tmp = n;
+        while (tmp.next != null) {
+            b.append(tmp.key).append("->");
+            tmp = tmp.next;
+        }
+        b.append(tmp.key);
+        return b.toString();
     }
     static <T> ListNode<T> reverse(ListNode<T> head) {
+        if (head == null)
+            return null;
         ListNode<T> curr = head;
         ListNode<T> prev = null;
-        while (curr != null && curr.next != null) {
+        while (curr.next != null) {
             ListNode<T> next = curr.next;
             curr.next = prev;
             prev = curr;
@@ -30,6 +49,41 @@ public class SLL {
         }
         curr.next = prev;
         return curr;
+    }
+    static <T> ListNode<T> recReverse(ListNode<T> node) {
+        if (node != null && node.next != null) {
+            ListNode<T> tail = recReverse(node.next);
+            node.next.next = node;
+            node.next = null; // critical
+            return tail;
+        }
+        return node;
+    }
+    private static <T> void recReverseAccInternal(ListNode<T> node, ListNode<T> acc) {
+        if (node != null) {
+            ListNode<T> next = node.next;
+            node.next = acc.next;
+            acc.next = node;
+            recReverseAccInternal(next, acc);
+        }
+    }
+    private static<T> void reverseAccNoTailCallInternal(ListNode<T> node, ListNode<T> acc) {
+        while (node != null) {
+            ListNode<T> next = node.next;
+            node.next = acc.next;
+            acc.next = node;
+            node = next;
+        }
+    }
+    static <T> ListNode<T> reverseAcc(ListNode<T> node) {
+        ListNode<T> acc = new ListNode<T>(null); // dummy key
+        recReverseAccInternal(node, acc);
+        return acc.next;
+    }
+    static <T>  ListNode<T> reverseAccNoTailCall(ListNode<T> node) {
+        ListNode<T> acc = new ListNode<T>(null); // dummy key
+        reverseAccNoTailCallInternal(node, acc);
+        return acc.next;
     }
     static void addMsdFirst(ListNode<Integer> l1, ListNode<Integer> l2, ListNode<Integer> acc) {
         System.out.println("l1.key: " + l1.key + ", l2.key: " + l2.key);
