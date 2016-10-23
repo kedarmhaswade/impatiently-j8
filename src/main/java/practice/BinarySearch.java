@@ -1,7 +1,9 @@
 package practice;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  * <p>
@@ -28,7 +30,7 @@ public final class BinarySearch {
 
         public static <E extends Comparable<E>> ArrayListOfUnknownSize<E> asList(E... es) {
             ArrayListOfUnknownSize<E> list = new ArrayListOfUnknownSize<>(es.length);
-            Arrays.stream(es).forEach(e -> list.add(e));
+            Arrays.stream(es).forEach(list::add);
             return list;
         }
     }
@@ -82,5 +84,126 @@ public final class BinarySearch {
             }
         }
         return - (low + 1);
+    }
+
+    /**
+     * Given a sorted array, finds the <i>first occurrence</i> of the given key.
+     * @param a the array to search in, assumed to be sorted
+     * @param key the key to search for
+     * @return If the key is <i>not</i> found, this method returns what {@linkplain Arrays#binarySearch(int[], int) JDK's binary search}
+     * returns (read it carefully). <br/>
+     * If the key is found, returns the index of its first occurrence (always non-negative).
+     */
+    public static int firstOccurrence(int[] a, int key) {
+        int i = Arrays.binarySearch(a, key);
+        if (i < 0)
+            return i;
+        // the key is found, now find the last index of the element that is NOT the same as key
+        int fromInc = 0; // it could be as early as 0
+        int toInc = i; // a[toInc] = key
+        while (fromInc < toInc) {
+            int mid = (fromInc + toInc) >>> 1;
+            int midVal = a[mid];
+            if (midVal == key)
+                toInc = mid;
+            else if (midVal < key)
+                fromInc = mid + 1;
+            else
+                throw new AssertionError("assumptions challenged");
+        }
+        return fromInc;
+    }
+
+    /**
+     * Returns the index of the first element <i>greater than</i> the given key in a given <i>sorted</i> array.
+     * @param a sorted array to search in
+     * @param key the key to search for
+     * @return
+     * <ol>
+     *     <li> 0, if the key is the smaller than the 0th element of a</li>
+     *     <li> -1 if they key is greater than the last element of a</li>
+     *     <li> a positive integer denoting the index of the first element greater than key</li>
+     * </ol>
+     */
+    public static int firstGreatThan(int[] a, int key) {
+        int loIn = 0;
+        int hiEx = a.length;
+        while (loIn < hiEx) {
+            int mid = (loIn + hiEx) >>> 1;
+            int midVal = a[mid];
+            if (key >= midVal)
+                loIn = mid + 1;
+            else {
+                assert key < midVal;
+                hiEx = mid;
+            }
+        }
+        if (loIn == a.length)
+            return -1; // all elements are <= key
+        return loIn;
+    }
+
+    /**
+     * <p>
+     *     Given a sorted array that is right-rotated, such that the minimum element lies somewhere in the
+     *     middle (a wedge is created), this method efficiently finds the index of that minimum element.
+     * </p>
+     * @param rar the right-rotated array
+     * @return the index of the minimum element
+     */
+    public static int findMinRightRotated(int[] rar) {
+        final int len = rar.length;
+        // special case lengths <= 3?
+        int lo = 0;
+        int hi = len;
+        while (lo < hi) {
+            int mid = (lo + hi) >>> 1;
+            int midVal = rar[mid];
+            int prevIndex = mid - 1 < 0 ? hi - 1 : mid - 1;
+            int nextIndex = mid + 1 < len ? mid + 1 : 0;
+            if (midVal <= rar[prevIndex] && midVal <= rar[nextIndex])
+                return mid;
+            if (midVal > rar[hi - 1])
+                lo = mid;
+            else
+                hi = mid;
+        }
+        throw new AssertionError("can't reach here: lo: " + lo + ", hi: " + hi);
+    }
+
+    /**
+     * <p>
+     *     Given a non-negative integer n, finds another <i>integer</i> whose square is less than or equal to n.
+     * </p>
+     * @param n the given number
+     * @return see above
+     */
+    public static long intSquareRoot(long n) {
+        if (n < 0)
+            throw new IllegalArgumentException("negative n: " + n);
+        if (n == 0)
+            return 0;
+        long pr = 2;
+        long nr = n/pr;
+        while (true) {
+            long mid = (pr + nr) >>> 1;
+//            System.out.println(pr + ", " + nr + ", " + mid);
+            long sq, nextSq;
+            try {
+                sq = Math.multiplyExact(mid, mid);
+                nextSq = Math.multiplyExact(mid + 1, mid + 1);
+            } catch(ArithmeticException a) {
+                nr = mid;
+                continue;
+            }
+            if (sq == n || ((sq < n) && (nextSq > n)))
+                return mid;
+            else if (sq > n)
+                nr = mid;
+            else {
+                assert sq < n;
+                pr = mid;
+            }
+        }
     }
 }

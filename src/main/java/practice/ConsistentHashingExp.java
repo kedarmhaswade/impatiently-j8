@@ -27,8 +27,8 @@ public class ConsistentHashingExp {
             key = (key * 2862933555777941757L) + 1;
             j = (int) ((b + 1) * ((double)(1L << 31)) / ((double)((key >> 33) + 1)));
         }
-//        return b;
-        return b < 0 ? -(b % m): b % m;
+        return b;
+//        return b < 0 ? -(b % m): b % m;
     };
 //    static int h(int x, int m) {
 //        int hash =  ((7 * x) + 23) % m;
@@ -39,8 +39,8 @@ public class ConsistentHashingExp {
                            // accept the bifunction, parameterize the behavior
                            BiFunction<Long, Integer, Integer> hf) {
         int nMovers = 0;
-        for (int i = fromInc; i < toExc; i++) {
-            if (hf.apply((long) i, n1).intValue() != hf.apply((long) i, n2).intValue()) // h(i, n1) != h(i, n2)
+        for (long i = fromInc; i < toExc; i++) {
+            if (hf.apply(i, n1).intValue() != hf.apply(i, n2).intValue()) // h(i, n1) != h(i, n2)
                 nMovers += 1;
         }
         return nMovers;
@@ -55,11 +55,11 @@ public class ConsistentHashingExp {
         System.out.println("Number of items moving when using simple hash function: " + moved + " %age: " + (moved * 100.0)/LIM);
         moved = itemsMoving(0, LIM, n1, n2, JC);
         System.out.println("Number of items moving when using jump consistent hash function: " + moved + " %age: " + (moved * 100.0)/LIM);
-        System.out.println("distributions:" );
-        System.out.println("simple hash function: ");
-        printDistributions(LIM, n1, H);
-        System.out.println("jump consistent hash function: ");
-        printDistributions(LIM, n1, JC);
+//        System.out.println("distributions:" );
+//        System.out.println("simple hash function: ");
+//        printDistributions(LIM, n1, H);
+//        System.out.println("jump consistent hash function: ");
+//        printDistributions(LIM, n1, JC);
     }
 
 //    private static void printDistributions(int lim, int m) {
