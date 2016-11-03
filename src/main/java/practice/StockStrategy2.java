@@ -11,24 +11,12 @@ package practice;
 public class StockStrategy2 {
 
     static double maxProfit(double[] p) {
-        double maxp = 0.0;
-        int pbi = 0; // possible buy index, because what if no better sell price comes later?
-        int bi = -1, si = -1; // buy and sell indexes corresponding to the max profit
-        for (int i = 1; i < p.length; i++) {
-            double diff = p[i] - p[pbi];
-            if (diff > maxp) {
-                maxp = diff;
-                si = i;
-                bi = pbi;
-            }
-            if (p[i] < p[pbi]) {
-                if (p[pbi] > p[i])
-                    pbi = i;
-            }
-        }
-        if (maxp > 0) {
-            System.out.println("occurs with buying at: " + bi + ", for: " + p[bi] + " and selling at: " + si + " for:" +
-                    " " + p[si]);
+        double minSoFar = Double.MAX_VALUE;
+        double maxp = Double.MIN_VALUE;
+        for (int i = 0; i < p.length; i++) {
+            minSoFar = Math.min(minSoFar, p[i]);
+            double profit = p[i] - minSoFar; // this is the profit if we choose to sell on the ith day
+            maxp = Math.max(maxp, profit);
         }
         return maxp;
     }

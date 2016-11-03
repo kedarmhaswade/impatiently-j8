@@ -4,7 +4,7 @@ package practice;
  * <p>
  *     Imagine a binary tree such that each of its node's keys is a binary digit and the path from root to a leaf
  *     represents a binary-encoded number with root key being the MSB. Find the sum of all such binary numbers
- *     in a subtree rooted at a given tree.
+ *     in a subtree rooted at a given node.
  * </p>
  * Created by kmhaswade on 9/5/16.
  */

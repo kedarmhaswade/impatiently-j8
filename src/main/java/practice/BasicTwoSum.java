@@ -2,7 +2,7 @@ package practice;
 
 /**
  * <p>
- *     Given a sorted array, how would you find if two of its elements to a given sum?
+ *     Given a sorted array, how would you find if two of its elements add up to a given sum?
  * </p>
  * <p>
  *     Use invariants. The array is sorted!

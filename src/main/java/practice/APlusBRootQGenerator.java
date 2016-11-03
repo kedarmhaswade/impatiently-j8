@@ -31,7 +31,7 @@ public class APlusBRootQGenerator {
         }
 
         public Stream<Node> successors() {
-            return Stream.of(new Node((a + 1), b, q), new Node(a, b + 1, q));
+            return Stream.of(new Node(a + 1, b, q), new Node(a, b + 1, q));
         }
     }
 
