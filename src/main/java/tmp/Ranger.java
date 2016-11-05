@@ -4,14 +4,14 @@ import java.io.*;
 
 /** Given a  stream of strings that represent _sorted_ numbers, finds the ranges of contiguous numbers from them.
  * <p>
- *     For example, given:
+ *     For example,when given:
  *     12
  *     13
  *     15
  *     20
  *     21
  *     22
- *     should print:
+ *     it should print:
  *     12..13, 15, 20..22
  * </p>
  * Created by kmhaswade on 6/10/16.

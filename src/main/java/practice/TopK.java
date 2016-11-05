@@ -28,6 +28,7 @@ public class TopK {
                 new PriorityQueue<>(k, (a, b) -> Long.compare(a.getValue(), b.getValue()));
         Set<Entry<String, Long>> histo = words(args[1]); // this is the histogram of words
         Iterator<Entry<String, Long>> iter = histo.iterator();
+        // first fill the first k entries, bail out if we have fewer than k
         for (int i = 0; i < k; i++) {
             if (iter.hasNext()) {
                 Entry<String, Long> word = iter.next();
