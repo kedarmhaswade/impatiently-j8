@@ -17,7 +17,7 @@ import static practice.euler.Collatz.getChainLength;
 public class CollatzTest {
     @Test
     public void findLongestChainTest() {
-        int limit = 1_000_000;
+        int limit = 10_000;
         Map<Integer, Integer> cache = new HashMap<>(limit);
         assertEquals(findLongestChainIter(limit), findLongestChain(limit, cache));
     }

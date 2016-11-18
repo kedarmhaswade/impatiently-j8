@@ -7,7 +7,7 @@ public class Driver {
     public static void main(String[] args) {
         Team a = new Team("Riders", "Leo");
         Team b = new Team("Sliders", "Ted");
-        TwoTeamGame game = new TwoTeamGame(a, b, 3);
+        TwoTeamGame game = new TwoTeamGame(a, b, 7);
         game.start(System.out::println);
     }
 }
