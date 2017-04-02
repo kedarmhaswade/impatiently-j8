@@ -16,6 +16,7 @@ public class TT {
         Collections.sort(A);
         int si = -1, ei = -1;
         for (int i = 0; i < A.size(); i++) {
+            // there is a big fat bug here but it works!
             if (A.get(i) != B.get(i)) {
                 if (si < 0) {
                     si = i;
@@ -39,14 +40,21 @@ public class TT {
     }
 
     public static void main(String[] args) {
-        Integer v1 = 43524;
-        Integer v2 = 43525;
-        System.out.println(v1 == v2 - 1);
-        Integer v3 = 43525 - 1;
-        System.out.println(v1 == v3);
-
-        ArrayList<Integer> a = new ArrayList<>(Arrays.asList(34342));
-        ArrayList<Integer> b = new ArrayList<>(Arrays.asList(42342));
-        System.out.println(Objects.equals(a.get(0), b.get(0)));
+        ArrayList<Integer> a = new ArrayList<>();
+        a.add(1100);
+        a.add(1200);
+        a.add(1400);
+        a.add(1300);
+        a.add(1500);
+        System.out.println(x(a));
     }
+//        Integer v1 = 43524;
+//        Integer v2 = 43525;
+//        System.out.println(v1 == v2 - 1);
+//        Integer v3 = 43525 - 1;
+//        System.out.println(v1 == v3);
+//
+//        ArrayList<Integer> a = new ArrayList<>(Arrays.asList(34342));
+//        ArrayList<Integer> b = new ArrayList<>(Arrays.asList(42342));
+//        System.out.println(Objects.equals(a.get(0), b.get(0)));
 }

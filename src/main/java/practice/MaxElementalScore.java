@@ -173,9 +173,9 @@ public class MaxElementalScore {
     }
 
     public static void main(String[] args) throws IOException {
-//        doDict();
-        doWord("herbal");
-        doTableItself();
+        doDict();
+//        doWord("supercalifragilisticexpialidocious");
+//        doTableItself();
     }
     static void doWord(String word) throws IOException {
         int max = getMaxElementalScore(word, table);
