@@ -9,8 +9,8 @@ package tmp;
  */
 public class AutoboxAndNewCachedInteger {
     public static void main(String[] args) {
-        Integer a = new Integer(100);
-        Integer b = 100;
+        int a = 4344;
+        Integer b = 4344;
         System.out.println(a == b);
     }
 }

@@ -5,7 +5,6 @@ import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.*;
-import static tmp.annotation.BigOhNotation.O_1;
 
 /**
  * <p>
@@ -16,16 +15,17 @@ import static tmp.annotation.BigOhNotation.O_1;
 @Target(METHOD)
 @Retention(CLASS)
 public @interface Complexity {
+    enum BigOhNotation {
+        O_1,
+        O_LOGN,
+        O_N,
+        O_NLOGN,
+        O_N2,
+        O_N3,
+        O_2N,
+        O_NFACT
+    }
     BigOhNotation time();
     BigOhNotation space();
 }
-enum BigOhNotation {
-    O_1,
-    O_LOGN,
-    O_N,
-    O_NLOGN,
-    O_N2,
-    O_N3,
-    O_2N,
-    O_NFACT
-}
+

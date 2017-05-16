@@ -1,6 +1,7 @@
 package tmp.annotation;
 
-import static tmp.annotation.BigOhNotation.*;
+import static tmp.annotation.Complexity.BigOhNotation.O_1;
+import static tmp.annotation.Complexity.BigOhNotation.O_LOGN;
 
 /**
  * Created by kedar on 4/2/17.
