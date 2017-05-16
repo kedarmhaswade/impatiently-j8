@@ -30,9 +30,10 @@ public class TopKAverageScore {
             String id = parts[0];
             long score = Long.valueOf(parts[1]);
             PriorityQueue<Long> minHeap = scores.get(id);
-            if (minHeap == null)
+            if (minHeap == null) {
                 scores.put(id, new PriorityQueue<>(k));
-            minHeap = scores.get(id);
+                minHeap = scores.get(id);
+            }
             assert minHeap != null;
             if (minHeap.size() < k) {
                 boolean added = minHeap.add(score);

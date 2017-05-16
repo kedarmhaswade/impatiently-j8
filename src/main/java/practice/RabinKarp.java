@@ -16,6 +16,13 @@ public class RabinKarp {
 
     private static final int BASE = 31;
 
+    /**
+     * Implements Rabin-Karp rolling hash algorithm, but suffers from excessive
+     * number of string instances.
+     * @param text string to search the pattern in
+     * @param str pattern to search for
+     * @return non negative integer denoting the first occurrence of str in text, -1 if there is no such occurrence
+     */
     public static int index(String text, String str) {
         int fixed = hash(str); // let it overflow
         int i = 0, slen = str.length(), tlen = text.length();
