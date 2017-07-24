@@ -7,9 +7,9 @@ import java.io.StringReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toList;
 import static practice.ClosestKWords.closestBfs;
 
 /**
@@ -28,7 +28,10 @@ public class ClosestKWordsTest {
             Map<String, List<ClosestKWords.Pair>> scores = new HashMap<>();
             br.lines().forEach(line -> {
                 String[] parts = line.split("\\s+");
-                scores.put(parts[0], stream(parts, 1, parts.length).map(ClosestKWords.Pair::valueOf).collect(Collectors.toList()));
+                scores.put(parts[0],
+                    stream(parts, 1, parts.length)
+                    .map(ClosestKWords.Pair::valueOf)
+                    .collect(toList()));
             });
             String word = "user";
             int k = 2;

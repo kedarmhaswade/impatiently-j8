@@ -24,7 +24,7 @@ public class SubsetSum {
             sums[set[i]] = set[i]; //e.g. sums[5] = 5
             //e.g. takenBy{5: => [5]}; maintains the numbers that make a given sum
             boolean added = takenBy.get(set[i]).add(set[i]);
-            assert added == true : set[i] + " should be added to the sum for i: " + i;
+            assert added : set[i] + " should be added to the sum for i: " + i;
         }
         //bottom up
         for (int i = set[0] + 1; i <= sum; i ++) {
