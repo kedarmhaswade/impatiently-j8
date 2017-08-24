@@ -291,7 +291,9 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             this.next = next;
         }
 
+        @Override
         public final K getKey()        { return key; }
+        @Override
         public final V getValue()      { return value; }
         public final String toString() { return key + "=" + value; }
 
@@ -299,6 +301,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             return Objects.hashCode(key) ^ Objects.hashCode(value);
         }
 
+        @Override
         public final V setValue(V newValue) {
             V oldValue = value;
             value = newValue;
@@ -571,6 +574,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      *
      * @return the number of key-value mappings in this map
      */
+    @Override
     public int size() {
         return size;
     }
@@ -580,6 +584,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      *
      * @return <tt>true</tt> if this map contains no key-value mappings
      */
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
@@ -601,6 +606,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      *
      * @see #put(Object, Object)
      */
+    @Override
     public V get(Object key) {
         Node<K,V> e;
         return (e = getNode(hash(key), key)) == null ? null : e.value;
@@ -641,6 +647,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      * @return <tt>true</tt> if this map contains a mapping for the specified
      * key.
      */
+    @Override
     public boolean containsKey(Object key) {
         return getNode(hash(key), key) != null;
     }
@@ -657,6 +664,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      *         (A <tt>null</tt> return can also indicate that the map
      *         previously associated <tt>null</tt> with <tt>key</tt>.)
      */
+    @Override
     public V put(K key, V value) {
         return putVal(hash(key), key, value, false, true);
     }
@@ -831,6 +839,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      * @param m mappings to be stored in this map
      * @throws NullPointerException if the specified map is null
      */
+    @Override
     public void putAll(Map<? extends K, ? extends V> m) {
         putMapEntries(m, true);
     }
@@ -844,6 +853,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      *         (A <tt>null</tt> return can also indicate that the map
      *         previously associated <tt>null</tt> with <tt>key</tt>.)
      */
+    @Override
     public V remove(Object key) {
         Node<K,V> e;
         return (e = removeNode(hash(key), key, null, false, true)) == null ?
@@ -905,6 +915,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      * Removes all of the mappings from this map.
      * The map will be empty after this call returns.
      */
+    @Override
     public void clear() {
         Node<K,V>[] tab;
         modCount++;
@@ -923,6 +934,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      * @return <tt>true</tt> if this map maps one or more keys to the
      *         specified value
      */
+    @Override
     public boolean containsValue(Object value) {
         Node<K,V>[] tab; V v;
         if ((tab = table) != null && size > 0) {
@@ -952,22 +964,30 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      *
      * @return a set view of the keys contained in this map
      */
+    @Override
     public Set<K> keySet() {
         Set<K> ks;
         return (ks = keySet) == null ? (keySet = new KeySet()) : ks;
     }
 
     final class KeySet extends AbstractSet<K> {
+        @Override
         public final int size()                 { return size; }
+        @Override
         public final void clear()               { HashMap.this.clear(); }
+        @Override
         public final Iterator<K> iterator()     { return new KeyIterator(); }
+        @Override
         public final boolean contains(Object o) { return containsKey(o); }
+        @Override
         public final boolean remove(Object key) {
             return removeNode(hash(key), key, null, false, true) != null;
         }
+        @Override
         public final Spliterator<K> spliterator() {
             return new KeySpliterator<>(HashMap.this, 0, -1, 0, 0);
         }
+        @Override
         public final void forEach(Consumer<? super K> action) {
             Node<K,V>[] tab;
             if (action == null)
@@ -999,19 +1019,26 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      *
      * @return a view of the values contained in this map
      */
+    @Override
     public Collection<V> values() {
         Collection<V> vs;
         return (vs = values) == null ? (values = new Values()) : vs;
     }
 
     final class Values extends AbstractCollection<V> {
+        @Override
         public final int size()                 { return size; }
+        @Override
         public final void clear()               { HashMap.this.clear(); }
+        @Override
         public final Iterator<V> iterator()     { return new ValueIterator(); }
+        @Override
         public final boolean contains(Object o) { return containsValue(o); }
+        @Override
         public final Spliterator<V> spliterator() {
             return new ValueSpliterator<>(HashMap.this, 0, -1, 0, 0);
         }
+        @Override
         public final void forEach(Consumer<? super V> action) {
             Node<K,V>[] tab;
             if (action == null)
@@ -1044,17 +1071,22 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      *
      * @return a set view of the mappings contained in this map
      */
+    @Override
     public Set<Entry<K,V>> entrySet() {
         Set<Entry<K,V>> es;
         return (es = entrySet) == null ? (entrySet = new EntrySet()) : es;
     }
 
     final class EntrySet extends AbstractSet<Entry<K,V>> {
+        @Override
         public final int size()                 { return size; }
+        @Override
         public final void clear()               { HashMap.this.clear(); }
+        @Override
         public final Iterator<Entry<K,V>> iterator() {
             return new EntryIterator();
         }
+        @Override
         public final boolean contains(Object o) {
             if (!(o instanceof Map.Entry))
                 return false;
@@ -1063,6 +1095,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             Node<K,V> candidate = getNode(hash(key), key);
             return candidate != null && candidate.equals(e);
         }
+        @Override
         public final boolean remove(Object o) {
             if (o instanceof Map.Entry) {
                 Entry<?,?> e = (Entry<?,?>) o;
@@ -1072,9 +1105,11 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             }
             return false;
         }
+        @Override
         public final Spliterator<Entry<K,V>> spliterator() {
             return new EntrySpliterator<>(HashMap.this, 0, -1, 0, 0);
         }
+        @Override
         public final void forEach(Consumer<? super Entry<K,V>> action) {
             Node<K,V>[] tab;
             if (action == null)
@@ -1187,6 +1222,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
         return v;
     }
 
+    @Override
     public V computeIfPresent(K key,
                               BiFunction<? super K, ? super V, ? extends V> remappingFunction) {
         if (remappingFunction == null)
@@ -1501,16 +1537,19 @@ public class HashMap<K,V> extends AbstractMap<K,V>
 
     final class KeyIterator extends HashIterator
         implements Iterator<K> {
+        @Override
         public final K next() { return nextNode().key; }
     }
 
     final class ValueIterator extends HashIterator
         implements Iterator<V> {
+        @Override
         public final V next() { return nextNode().value; }
     }
 
     final class EntryIterator extends HashIterator
         implements Iterator<Entry<K,V>> {
+        @Override
         public final Entry<K,V> next() { return nextNode(); }
     }
 
@@ -1561,6 +1600,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             super(m, origin, fence, est, expectedModCount);
         }
 
+        @Override
         public KeySpliterator<K,V> trySplit() {
             int hi = getFence(), lo = index, mid = (lo + hi) >>> 1;
             return (lo >= mid || current != null) ? null :
@@ -1568,6 +1608,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
                                         expectedModCount);
         }
 
+        @Override
         public void forEachRemaining(Consumer<? super K> action) {
             int i, hi, mc;
             if (action == null)
@@ -1597,6 +1638,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             }
         }
 
+        @Override
         public boolean tryAdvance(Consumer<? super K> action) {
             int hi;
             if (action == null)
@@ -1619,6 +1661,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             return false;
         }
 
+        @Override
         public int characteristics() {
             return (fence < 0 || est == map.size ? Spliterator.SIZED : 0) |
                 Spliterator.DISTINCT;
@@ -1633,6 +1676,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             super(m, origin, fence, est, expectedModCount);
         }
 
+        @Override
         public ValueSpliterator<K,V> trySplit() {
             int hi = getFence(), lo = index, mid = (lo + hi) >>> 1;
             return (lo >= mid || current != null) ? null :
@@ -1640,6 +1684,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
                                           expectedModCount);
         }
 
+        @Override
         public void forEachRemaining(Consumer<? super V> action) {
             int i, hi, mc;
             if (action == null)
@@ -1669,6 +1714,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             }
         }
 
+        @Override
         public boolean tryAdvance(Consumer<? super V> action) {
             int hi;
             if (action == null)
@@ -1691,6 +1737,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             return false;
         }
 
+        @Override
         public int characteristics() {
             return (fence < 0 || est == map.size ? Spliterator.SIZED : 0);
         }
@@ -1704,6 +1751,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             super(m, origin, fence, est, expectedModCount);
         }
 
+        @Override
         public EntrySpliterator<K,V> trySplit() {
             int hi = getFence(), lo = index, mid = (lo + hi) >>> 1;
             return (lo >= mid || current != null) ? null :
@@ -1711,6 +1759,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
                                           expectedModCount);
         }
 
+        @Override
         public void forEachRemaining(Consumer<? super Entry<K,V>> action) {
             int i, hi, mc;
             if (action == null)
@@ -1740,6 +1789,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             }
         }
 
+        @Override
         public boolean tryAdvance(Consumer<? super Entry<K,V>> action) {
             int hi;
             if (action == null)
@@ -1762,6 +1812,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             return false;
         }
 
+        @Override
         public int characteristics() {
             return (fence < 0 || est == map.size ? Spliterator.SIZED : 0) |
                 Spliterator.DISTINCT;

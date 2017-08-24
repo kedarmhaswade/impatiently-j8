@@ -81,6 +81,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * @implSpec
      * This implementation returns <tt>entrySet().size()</tt>.
      */
+    @Override
     public int size() {
         return entrySet().size();
     }
@@ -91,6 +92,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * @implSpec
      * This implementation returns <tt>size() == 0</tt>.
      */
+    @Override
     public boolean isEmpty() {
         return size() == 0;
     }
@@ -108,6 +110,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * @throws ClassCastException   {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
      */
+    @Override
     public boolean containsValue(Object value) {
         Iterator<Entry<K,V>> i = entrySet().iterator();
         if (value==null) {
@@ -140,6 +143,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * @throws ClassCastException   {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
      */
+    @Override
     public boolean containsKey(Object key) {
         Iterator<Entry<K,V>> i = entrySet().iterator();
         if (key==null) {
@@ -172,6 +176,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * @throws ClassCastException            {@inheritDoc}
      * @throws NullPointerException          {@inheritDoc}
      */
+    @Override
     public V get(Object key) {
         Iterator<Entry<K,V>> i = entrySet().iterator();
         if (key==null) {
@@ -205,6 +210,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * @throws NullPointerException          {@inheritDoc}
      * @throws IllegalArgumentException      {@inheritDoc}
      */
+    @Override
     public V put(K key, V value) {
         throw new UnsupportedOperationException();
     }
@@ -231,6 +237,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * @throws ClassCastException            {@inheritDoc}
      * @throws NullPointerException          {@inheritDoc}
      */
+    @Override
     public V remove(Object key) {
         Iterator<Entry<K,V>> i = entrySet().iterator();
         Entry<K,V> correctEntry = null;
@@ -276,6 +283,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * @throws NullPointerException          {@inheritDoc}
      * @throws IllegalArgumentException      {@inheritDoc}
      */
+    @Override
     public void putAll(Map<? extends K, ? extends V> m) {
         for (Entry<? extends K, ? extends V> e : m.entrySet())
             put(e.getKey(), e.getValue());
@@ -293,6 +301,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      *
      * @throws UnsupportedOperationException {@inheritDoc}
      */
+    @Override
     public void clear() {
         entrySet().clear();
     }
@@ -324,39 +333,48 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * is performed, so there is a slight chance that multiple calls to this
      * method will not all return the same set.
      */
+    @Override
     public Set<K> keySet() {
         if (keySet == null) {
             keySet = new AbstractSet<K>() {
+                @Override
                 public Iterator<K> iterator() {
                     return new Iterator<K>() {
                         private Iterator<Entry<K,V>> i = entrySet().iterator();
 
+                        @Override
                         public boolean hasNext() {
                             return i.hasNext();
                         }
 
+                        @Override
                         public K next() {
                             return i.next().getKey();
                         }
 
+                        @Override
                         public void remove() {
                             i.remove();
                         }
                     };
                 }
 
+                @Override
                 public int size() {
                     return AbstractMap.this.size();
                 }
 
+                @Override
                 public boolean isEmpty() {
                     return AbstractMap.this.isEmpty();
                 }
 
+                @Override
                 public void clear() {
                     AbstractMap.this.clear();
                 }
 
+                @Override
                 public boolean contains(Object k) {
                     return AbstractMap.this.containsKey(k);
                 }
@@ -381,39 +399,48 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * performed, so there is a slight chance that multiple calls to this
      * method will not all return the same collection.
      */
+    @Override
     public Collection<V> values() {
         if (values == null) {
             values = new AbstractCollection<V>() {
+                @Override
                 public Iterator<V> iterator() {
                     return new Iterator<V>() {
                         private Iterator<Entry<K,V>> i = entrySet().iterator();
 
+                        @Override
                         public boolean hasNext() {
                             return i.hasNext();
                         }
 
+                        @Override
                         public V next() {
                             return i.next().getValue();
                         }
 
+                        @Override
                         public void remove() {
                             i.remove();
                         }
                     };
                 }
 
+                @Override
                 public int size() {
                     return AbstractMap.this.size();
                 }
 
+                @Override
                 public boolean isEmpty() {
                     return AbstractMap.this.isEmpty();
                 }
 
+                @Override
                 public void clear() {
                     AbstractMap.this.clear();
                 }
 
+                @Override
                 public boolean contains(Object v) {
                     return AbstractMap.this.containsValue(v);
                 }
@@ -422,6 +449,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
         return values;
     }
 
+    @Override
     public abstract Set<Entry<K,V>> entrySet();
 
 
@@ -546,6 +574,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      *
      * @return a shallow copy of this map
      */
+    @Override
     protected Object clone() throws CloneNotSupportedException {
         AbstractMap<?,?> result = (AbstractMap<?,?>)super.clone();
         result.keySet = null;
@@ -617,6 +646,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
          *
          * @return the key corresponding to this entry
          */
+        @Override
         public K getKey() {
             return key;
         }
@@ -626,6 +656,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
          *
          * @return the value corresponding to this entry
          */
+        @Override
         public V getValue() {
             return value;
         }
@@ -637,6 +668,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
          * @param value new value to be stored in this entry
          * @return the old value corresponding to the entry
          */
+        @Override
         public V setValue(V value) {
             V oldValue = this.value;
             this.value = value;
@@ -747,6 +779,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
          *
          * @return the key corresponding to this entry
          */
+        @Override
         public K getKey() {
             return key;
         }
@@ -756,6 +789,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
          *
          * @return the value corresponding to this entry
          */
+        @Override
         public V getValue() {
             return value;
         }
@@ -770,6 +804,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
          * @return (Does not return)
          * @throws UnsupportedOperationException always
          */
+        @Override
         public V setValue(V value) {
             throw new UnsupportedOperationException();
         }

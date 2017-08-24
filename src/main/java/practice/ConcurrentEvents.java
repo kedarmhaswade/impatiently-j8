@@ -41,6 +41,7 @@ public class ConcurrentEvents {
             this.e = e;
             this.isStart = isStart;
         }
+        @Override
         public int compareTo(Endpoint that) {
             int v1 = this.isStart ? this.e.start : this.e.end;
             int v2 = that.isStart ? that.e.start : that.e.end;

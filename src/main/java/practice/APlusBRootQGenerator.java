@@ -26,6 +26,7 @@ public class APlusBRootQGenerator {
             this.value = a + (b * Math.sqrt(q));
         }
 
+        @Override
         public int compareTo(Node that) {
             return Double.compare(this.value, that.value);
         }

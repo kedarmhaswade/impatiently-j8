@@ -71,6 +71,7 @@ public class ParallelMandelbrot4 extends Thread {
         this.me = me;
     }
 
+    @Override
     public void run() {
 
         int begin, end;

@@ -11,6 +11,7 @@ public class ProducerConsumer {
         PC pc = new PC();
 
         Thread changer = new Thread(new Runnable() {
+            @Override
             public void run(){
                 try {
                     pc.producer();
@@ -21,6 +22,7 @@ public class ProducerConsumer {
         });
 
         Thread listener = new Thread(new Runnable(){
+            @Override
             public void run() {
                 try {
                     pc.consumer();

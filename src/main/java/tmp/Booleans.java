@@ -26,10 +26,12 @@ public class Booleans implements BooleanArray {
                 new NegationHandler(target));
     }
 
+    @Override
     public boolean getDataAt(int i) {
         return data[i];
     }
 
+    @Override
     public BooleanArray opposite() {
         if (OPPOSITE == null)
             OPPOSITE = (BooleanArray) initOpposite(this);

@@ -7,11 +7,13 @@ public class Spurious {
     public static void main(String[] args) {
 //        final Object lock = new Object();
         Thread t1 = new Thread() {
+            @Override
             public void run() {
                // System.out.println("Hey!");
             }
         };
         Thread t2 = new Thread() {
+            @Override
             public void run()
             {
                 try {
