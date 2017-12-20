@@ -56,4 +56,8 @@ public class ConsecutiveSum {
         }
         return ways;
     }
+
+    public static void main(String[] args) {
+
+    }
 }

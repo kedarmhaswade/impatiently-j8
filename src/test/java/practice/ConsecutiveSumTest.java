@@ -47,6 +47,15 @@ public class ConsecutiveSumTest {
     public void testMillion() {
         testInner(1_000_000, 6);
     }
+    @Test
+    public void test1000() {
+        testInner(1_000, 3);
+    }
+    @Test
+    public void test10Million() {
+        testInner(100_000_000, 8);
+    }
+
 
 
     private long sumIntsInArithmeticProgression(Range r, int d) {

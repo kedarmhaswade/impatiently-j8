@@ -32,7 +32,8 @@ public class FutureEx {
     public static void main(String[] args) {
         String word = "import";
         String path = "/Users/kedar/gh/impatiently-j8/src/main/java/juc";
-        System.out.println("number of times: " + word + " appears: " + countWord(word, path));
+        System.out.println("In *all* the files in the path: " + path
+            + ", number of times the word: " + word + " appears is: " + countWord(word, path));
     }
 
     private static long countWord(String word, String path) {
