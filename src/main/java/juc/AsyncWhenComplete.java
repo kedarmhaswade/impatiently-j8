@@ -21,6 +21,7 @@ public class AsyncWhenComplete {
             Random rand = new Random(currentTimeMillis());
             boolean shouldThrow = rand.nextBoolean();
             System.out.println("shouldThrow: " + shouldThrow);
+            System.out.println("This task is running in: " + Thread.currentThread().getName());
             if (shouldThrow) {
                 RuntimeException e = new RuntimeException("simulated exception ...");
                 System.out.println("exception message: " + e.getMessage());
@@ -33,6 +34,7 @@ public class AsyncWhenComplete {
             }
         });
         asyncOperationWithResult.whenComplete((asyncResult, e) -> {
+            System.out.println("When complete is in: " + Thread.currentThread().getName());
             if (asyncResult == null) {
                 System.out.println("async asyncOperationWithResult is null " +
                     "ensure that async operation threw exception with this message: " + e.getMessage());
