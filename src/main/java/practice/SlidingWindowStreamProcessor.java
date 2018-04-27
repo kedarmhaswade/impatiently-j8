@@ -40,7 +40,8 @@ public class SlidingWindowStreamProcessor {
             }
             int back = front - length;
             if (back >= 0 && (back % slide) == 0) {
-                buckets.removeFirst();
+                Bucket<T> tBucket = buckets.removeFirst();
+                System.out.println("Removed bucket: " + tBucket.id);
             }
             itemSeq.incrementAndGet();
         });
@@ -49,7 +50,7 @@ public class SlidingWindowStreamProcessor {
 
     public static void main(String[] args) {
 
-        new SlidingWindowStreamProcessor(5, 1).process(IntStream.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).boxed());
+        new SlidingWindowStreamProcessor(5, 3).process(IntStream.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).boxed());
     }
 
     private static class Bucket<T> {

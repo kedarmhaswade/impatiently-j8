@@ -7,7 +7,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 /**
- * <p> Given two sorted lists of non-overlapping, closed integer intervals (i.e. [a, b] where a < b and a anb b are
+ * <p> Given two sorted lists of non-overlapping, closed integer intervals (i.e. [a, b] where a &lt; b and a anb b are
  * ints) find all the intersecting or overlapping intervals.</p> <p> Example:</p>
  * <pre>
  *  Input:
@@ -26,19 +26,20 @@ public class OverlappingIntervals {
         List<Interval> left = intervals(xs);
         List<Interval> right = intervals(ys);
         check(left, right);
-        left = intervals(new int[][]{{1, 10}});
-        right = intervals(new int[][]{{2, 3}, {4, 5}, {6, 7}, {9, 11}});
+        left = intervals(new int[][] {{1, 10}});
+        right = intervals(new int[][] {{2, 3}, {4, 5}, {6, 7}, {9, 11}});
         check(left, right);
-        left = intervals(new int[][]{{2, 3}, {4, 5}, {6, 7}, {9, 11}});
-        right = intervals(new int[][]{{1, 10}});
+        left = intervals(new int[][] {{2, 3}, {4, 5}, {6, 7}, {9, 11}});
+        right = intervals(new int[][] {{1, 10}});
         check(left, right);
-        left = intervals(new int[][]{{1, 2}});
-        right = intervals(new int[][]{{4, 5}});
+        left = intervals(new int[][] {{1, 2}});
+        right = intervals(new int[][] {{4, 5}});
         check(left, right);
     }
 
     private static void check(List<Interval> left, List<Interval> right) {
-        int i = 0, j = 0;
+        int i = 0;
+        int j = 0;
         List<Interval> overlapping = new ArrayList<>(left.size());
         while (i < left.size() && j < right.size()) {
             Pair p = left.get(i).compareTo(right.get(j));
@@ -47,11 +48,11 @@ public class OverlappingIntervals {
                 boolean added = overlapping.add(p.interval);
                 assert added;
             }
-            if (p.order == -1)
+            if (p.order == -1) {
                 i += 1;
-            else if (p.order == 1)
+            } else if (p.order == 1) {
                 j += 1;
-            else {
+            } else {
                 i += 1;
                 j += 1;
             }
@@ -81,7 +82,7 @@ public class OverlappingIntervals {
     }
 
     static final class Interval {
-        final static Interval NONE = new Interval(0, 0); // lo and hi do not matter, we do identity comparison
+        static final Interval NONE = new Interval(0, 0); // lo and hi do not matter, we do identity comparison
         final int lo;
         final int hi;
 
