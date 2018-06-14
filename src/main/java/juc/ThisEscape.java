@@ -1,5 +1,7 @@
 package juc;
 
+import static java.lang.Thread.sleep;
+
 /**
  * <p>
  *     One of the many things we must not do while trying to write thread-safe programs is let
@@ -16,29 +18,22 @@ package juc;
  * Created by kedar on 2/28/17.
  */
 public class ThisEscape {
-    public final int pub;
-    private final int pri;
+    private final int num;
 
-    ThisEscape() {
-        this.pri = 102;
+    private ThisEscape() {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println(ThisEscape.this.hashCode() + " pub: " + pub);
+                System.out.println("Object.hashCode = " + ThisEscape.this.hashCode() + " value of final field num: " + num);
             }
         });
         t.start();
-        try {
-            t.join();
-        } catch (InterruptedException e) {
-            System.out.println("interrupted while joining thread: " + t);
-        }
-        this.pub = 42;
+        this.num = 42;
     }
 
-    public static void main(String[] args) {
-        ThisEscape e = new  ThisEscape();
-        System.out.println(e.hashCode() + " pub: " + e.pub);
-        System.out.println("Because it was not fully constructed and the this reference escaped, you saw two different values of its 'final' field");
+    public static void main(String[] args) throws InterruptedException {
+        ThisEscape e = new ThisEscape();
+        System.out.println("Object.hashCode = " + e.hashCode() + " value of final field num: " + e.num);
+        System.out.println("run it multiple times, you may see two different values of a 'final' field");
     }
 }

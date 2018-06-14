@@ -5,17 +5,17 @@ import java.util.LinkedList;
 
 /**
  * <p>
- *     Given the nine decimal digits [1..9], arrange them in order with either the
- *     +, -, or _ symbols before, after or in between any two to make the sum 100.
- *     The _ symbol acts as a concatenation and its value is value of the number
- *     formed by the concatenation of the digits in question. For instance,
- *     the value of 3_4 is 34, the value of 4_5_6 is 456 and so on. Note that the symbol
- *     _ itself does not need to be visible in the string representation of the
- *     arrangement.
+ * Given the nine decimal digits [1..9], arrange them in order with either the
+ * +, -, or _ symbols before, after or in between any two to make the sum 100.
+ * The _ symbol acts as a concatenation and its value is value of the number
+ * formed by the concatenation of the digits in question. For instance,
+ * the value of 3_4 is 34, the value of 4_5_6 is 456 and so on. Note that the symbol
+ * _ itself does not need to be visible in the string representation of the
+ * arrangement.
  * </p>
  * <p>
- *     As an example, one such arrangement is:
- *     <code> 12 + 3 + 4 + 5 - 6 - 7 + 89 = 100</code>
+ * As an example, one such arrangement is:
+ * <code> 12 + 3 + 4 + 5 - 6 - 7 + 89 = 100</code>
  * </p>
  * Created by kedar on 11/30/16.
  */
@@ -74,10 +74,11 @@ public class TargetHundred {
                 currentNumber = 0;
             } else {
                 int dig = c - '0';
-                if (currentNumber == 0)
+                if (currentNumber == 0) {
                     currentNumber = dig;
-                else
+                } else {
                     currentNumber = currentNumber * 10 + dig;
+                }
             }
             i += 1;
         }
@@ -85,7 +86,7 @@ public class TargetHundred {
 //        System.out.println(s);
 //        System.out.println(operators);
 //        System.out.println(operands);
-        while (! operators.isEmpty()) {
+        while (!operators.isEmpty()) {
             c = operators.remove();
             if (c == '+') {
                 answer = operands.remove() + operands.remove();
@@ -99,6 +100,7 @@ public class TargetHundred {
         return operands.remove();
 
     }
+
     public static void main(String[] args) {
         isSum("", 0, 100);
 //        System.out.println(eval("1-2-3+45"));

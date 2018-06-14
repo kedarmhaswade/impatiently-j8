@@ -7,7 +7,6 @@ import java.util.List;
 public class AmountChanger {
 
     private static int nWays(int amount, List<Integer> denom, int startIndex, List<Integer> acc) {
-//        System.out.println("nWays(" + amount + ", " + denom + ", " + acc + ")");
         if (amount == 0) {
             System.out.println(acc);
             return 1;
@@ -30,6 +29,6 @@ public class AmountChanger {
     }
 
     public static void main(String[] args) {
-        System.out.println(nWays(100, Arrays.asList(1, 5, 10, 25), 0, new ArrayList<>()));
+        System.out.println(nWays(10, Arrays.asList(1, 2, 5, 10), 0, new ArrayList<>()));
     }
 }
