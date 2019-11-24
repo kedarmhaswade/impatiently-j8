@@ -1,7 +1,5 @@
 package tmp;
 
-import org.omg.CORBA.PERSIST_STORE;
-
 import java.util.Optional;
 
 /** What happens if you have a method f that returns an Optional&lt;T> and T has a method g
