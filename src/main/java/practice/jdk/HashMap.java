@@ -250,7 +250,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
     static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
     /**
-     * The bin count threshold for using a tree rather than list for a
+     * The bin countFastRecursive threshold for using a tree rather than list for a
      * bin.  Bins are converted to trees when adding an element to a
      * bin with at least this many nodes. The value must be greater
      * than 2 and should be at least 8 to mesh with assumptions in
@@ -260,7 +260,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
     static final int TREEIFY_THRESHOLD = 8;
 
     /**
-     * The bin count threshold for untreeifying a (split) bin during a
+     * The bin countFastRecursive threshold for untreeifying a (split) bin during a
      * resize operation. Should be less than TREEIFY_THRESHOLD, and at
      * most 6 to mesh with shrinkage detection under removal.
      */
@@ -1456,7 +1456,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
         s.readInt();                // Read and ignore number of buckets
         int mappings = s.readInt(); // Read number of mappings (size)
         if (mappings < 0)
-            throw new InvalidObjectException("Illegal mappings count: " +
+            throw new InvalidObjectException("Illegal mappings countFastRecursive: " +
                                              mappings);
         else if (mappings > 0) { // (if zero, use defaults)
             // Size the table using given load factor only if within

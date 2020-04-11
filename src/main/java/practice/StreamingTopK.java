@@ -34,7 +34,7 @@ public class StreamingTopK<K> {
                 throw new IllegalArgumentException("null key not allowed");
             this.key = key;
             if (count <= 0)
-                throw new IllegalArgumentException("count must be positive: " + count);
+                throw new IllegalArgumentException("countFastRecursive must be positive: " + count);
             this.count = count;
         }
 
@@ -84,7 +84,7 @@ public class StreamingTopK<K> {
             CountNode<K> next = new CountNode(record, Math.addExact(node.count, 1));
             map.put(record, next); // take care of map
             boolean addNext = set.add(next); // take care of set
-            assert addNext : "strange, CountNode with count: " + next.count + " could not be added!";
+            assert addNext : "strange, CountNode with countFastRecursive: " + next.count + " could not be added!";
         }
     }
     public void query(int k, Consumer<CountNode<K>> consumer) {

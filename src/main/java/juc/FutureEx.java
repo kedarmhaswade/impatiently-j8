@@ -14,8 +14,8 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * <p>
  * Finds the number of times the word <code>import</code> appears in this folder. A sequential
- * way to do this would be to open each file, count the number of times <code>import</code>
- * appears in it and then report the cumulative count.
+ * way to do this would be to open each file, countFastRecursive the number of times <code>import</code>
+ * appears in it and then report the cumulative countFastRecursive.
  * </p>
  * <p>
  * Alternatively, we can have a file opened by a {@link java.util.concurrent.Callable} that

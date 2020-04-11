@@ -81,7 +81,7 @@ public class CHMEx {
             })
 //            .peek(System.out::println)
             .max()
-            .ifPresent(m -> System.out.println("word count: " + map.get(word) + ", should be: " + m));
+            .ifPresent(m -> System.out.println("word countFastRecursive: " + map.get(word) + ", should be: " + m));
         exec.shutdown();
         exec.awaitTermination(2, TimeUnit.SECONDS);
     }

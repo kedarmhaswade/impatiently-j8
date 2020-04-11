@@ -11,7 +11,7 @@ package practice;
 public class BitwiseExamples {
     /**
      * <p>
-     *     Find the number of 1's (<code>population count</code>) in the binary representation of an
+     *     Find the number of 1's (<code>population countFastRecursive</code>) in the binary representation of an
      *     integer (long) x. The JDK API {@linkplain Long#bitCount(long)}
      *     gives us this number, but this class uses following observation to get it:
      *     <ol>
@@ -26,7 +26,7 @@ public class BitwiseExamples {
      * @return number of set bits in x's two's complement notation
      */
     public static int popCount(long x) {
-        int pc = 0; // the number of 1 bits in x, aka population count
+        int pc = 0; // the number of 1 bits in x, aka population countFastRecursive
         while (x != 0) {
             x = x ^ (x & ~(x-1)); // find and unset the rightmost 1 bit in x
             pc += 1;

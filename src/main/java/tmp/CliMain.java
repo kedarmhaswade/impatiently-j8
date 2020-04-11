@@ -16,7 +16,7 @@ import java.util.List;
 public class CliMain {
     public static void main(String[] args) throws ParseException {
         Options options = new Options();
-        options.addOption("c", "count", true, "number of message to be generated");
+        options.addOption("c", "countFastRecursive", true, "number of message to be generated");
         options.addOption("s", "size", true, "size of each messages in bytes");
         options.addOption("t", "threads", true, "number of threads");
         options.addOption("r", "is random", false, "is random");
@@ -27,7 +27,7 @@ public class CliMain {
         int threads = Integer.parseInt(cli.getOptionValue("t","4"));
         boolean isRandom = Boolean.valueOf(cli.getOptionValue("r", "true"));
         System.out.println(" threads "+threads);
-        System.out.println(" count "+count);
+        System.out.println(" countFastRecursive "+count);
 
         List<Integer> list = Collections.unmodifiableList(Arrays.asList(1, 2, 3));
         List<Integer> copy = new ArrayList<>(list);

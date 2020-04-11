@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
  *     update the shared variable <i>exactly</i> an expected number (10*1000 = 10,000) of times.
  * </p>
  * <p>
- *     The final value of <code>count</code> is always <code>10000</code>.
+ *     The final value of <code>countFastRecursive</code> is always <code>10000</code>.
  *     Note that {@link ExecutorService#awaitTermination(long, TimeUnit)} is required to ensure
  *     that the right value is printed by the <code>main</code> thread.
  * </p>
@@ -26,16 +26,16 @@ public class RaceConditionEliminated {
     public static void main(String[] args) throws InterruptedException {
         // update the shared variable traditionally
         Runnable increment = () -> {
-            System.out.println("count was: " + count.get() + " in thread: " + Thread.currentThread());
+            System.out.println("countFastRecursive was: " + count.get() + " in thread: " + Thread.currentThread());
             for (int i = 0; i < 1000; i++)
                 count.getAndIncrement();
-            System.out.println("count updated to: " + count.get() + " in thread: " + Thread.currentThread());
+            System.out.println("countFastRecursive updated to: " + count.get() + " in thread: " + Thread.currentThread());
         };
         // update the shared variable as a side effect of an IntConsumer#accept
         Runnable incrementStream = () -> {
-            System.out.println("count was: " + count.get() + " in thread: " + Thread.currentThread());
+            System.out.println("countFastRecursive was: " + count.get() + " in thread: " + Thread.currentThread());
             IntStream.rangeClosed(1, 1000).forEach(i -> count.getAndIncrement());
-            System.out.println("count updated to: " + count.get() + " in thread: " + Thread.currentThread());
+            System.out.println("countFastRecursive updated to: " + count.get() + " in thread: " + Thread.currentThread());
         };
         Runnable bulkUpdate = () -> count.getAndAdd(1000);
         ExecutorService exec = Executors.newCachedThreadPool(); // short lived tasks

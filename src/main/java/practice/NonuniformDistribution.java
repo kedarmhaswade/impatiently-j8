@@ -43,7 +43,7 @@ public class NonuniformDistribution {
     public int nextIndex() {
         double p = random.nextDouble(); // returns a fraction that is guaranteed to be < 1.0d.
         int idx = Arrays.binarySearch(acc, p);
-//        System.out.println("bs returns index: " + idx + " for: " + p);
+//        System.out.println("bsRecursive returns index: " + idx + " for: " + p);
         return Math.abs(idx) - 1;
     }
     public int next() {

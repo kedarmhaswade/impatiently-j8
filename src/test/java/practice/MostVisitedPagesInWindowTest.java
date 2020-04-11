@@ -35,7 +35,7 @@ public class MostVisitedPagesInWindowTest {
         m.read("t", 6);
         m.read("a", 7);
         // (g, 1), (a, 2) are expired at this point, and t is most frequently accessed -- twice
-        // and a is the second most frequently accessed page with count 1
+        // and a is the second most frequently accessed page with countFastRecursive 1
         List<Map.Entry<String, Long>> list = m.find(2);
         assertEquals(2, list.size());
         assertEquals("t", list.get(0).getKey());

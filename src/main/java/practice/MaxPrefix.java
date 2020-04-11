@@ -2,7 +2,7 @@ package practice;
 
 /**
  * <p>
- *     Given an array of n integers, MaxPrefix is defined as count of elements that are greater
+ *     Given an array of n integers, MaxPrefix is defined as countFastRecursive of elements that are greater
  *     than the element and in the right side of array wrt to the element.
  *     Write a program to give the max of MaxPrefix
  *     <br/> Ex. Input 10 -4 6 2 8 9 4 Output is 5

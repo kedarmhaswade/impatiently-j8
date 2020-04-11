@@ -18,7 +18,7 @@ public class Counting {
     static int[] cSort(int[] input) {
         int k = Arrays.stream(input).max().getAsInt() + 1;
         int[] count = new int[k];
-        // count frequencies
+        // countFastRecursive frequencies
         Arrays.stream(input).forEach(x -> count[x] += 1);
 
         // prefix sum

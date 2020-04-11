@@ -9,7 +9,7 @@ import static java.lang.System.arraycopy;
  * <p>
  *     There's of course an O(n^2) algorithm that examines each pair a[i, j] such that i &lt; j and a[i] > a[j].
  *     But if the original array can be mutated and we have access to additional memory, the running time can be
- *     improved. The idea is to use merge-sort like (divide and conquer) technique and count the inversions as we do
+ *     improved. The idea is to use merge-sort like (divide and conquer) technique and countFastRecursive the inversions as we do
  *     that.
  * </p>
  * Created by kmhaswade on 8/19/16.
