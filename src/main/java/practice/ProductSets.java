@@ -21,6 +21,7 @@ import java.util.Set;
  * (it roughly translates to "one should desire to be beaten by one's son"), suggests, <br/>
  * I am happy to report that he beat me at the solution. His solution is
  * <a href="https://github.com/vapporwashmade/java-projects/commit/fbcd152a38ea87dc9731d529b9e473c988e09671#diff-bf351e2b2cef56315c66405649fc7d57"> here</a>.
+ * <br/> The only solace is that my program appears to run faster than his.
  * </p>
  */
 public class ProductSets {
