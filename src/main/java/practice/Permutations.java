@@ -29,7 +29,7 @@ public class Permutations {
         if (src.isEmpty()) {
             sink.accept(dest); // the base case, dest is a perm of src
         } else {
-            List<T> copy = new ArrayList<T>(dest);
+            List<T> copy = new ArrayList<>(dest);
             int len = src.size();
             for (int i = 0; i < len; i++) {
                 if (i == 0 || !src.get(i).equals(src.get(i - 1))) {

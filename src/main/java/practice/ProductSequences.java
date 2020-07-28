@@ -12,8 +12,9 @@ import java.util.List;
  * <p>
  * Then, I formulated a programming problem for my son (and anyone else):
  * <pre>
- *     Given a positive number p, find all the n-sets (n is given to be >= 1)
- *     such that the product of the members of each n-set is p.
+ Given a positive number p, find all the unique n-sequences of
+ integers (n is given to be >= 1) such that the product of the elements of
+ each n-sequence is p. No two sequences may have the same elements in any order.
  * </pre>
  * <pre>
  * As the Samskritam verse, पुत्रादिच्छेत् पराजयम्।
@@ -23,40 +24,29 @@ import java.util.List;
  * <br/> The only solace is that my program appears to run faster than his.
  * </pre>
  */
-public class ProductSets {
+public class ProductSequences {
 
     public static void main(String[] args) {
-        List<List<Integer>> nn = new ArrayList<>(10);
-        get(1_000_000_000, 8, 1, nn);
-//        get(4, 5, 1, nn);
-        System.out.println(nn);
-        System.out.println(nn.size());
+        List<List<Integer>> sequences = new ArrayList<>(10);
+        get(108, 3, 1, new ArrayList<>(), sequences);
+        System.out.println(sequences);
+        System.out.println(sequences.size());
     }
 
-    public static void get(int p, int n, int first, List<List<Integer>> numbers) {
+    public static void get(int p, int n, int first, List<Integer> sequence, List<List<Integer>> sequences) {
         if (n < 1)
             return; // do nothing
         if (n == 1) {
-            if (numbers.isEmpty()) {
-                numbers.add(new ArrayList<>());
-            }
-            for (List<Integer> list : numbers) {
-                list.add(p);
-            }
+            sequence.add(p); // ignore return value
+            sequences.add(sequence); //ignore return value
             return;
         }
         for (int i = first; i * i <= p; i++) {
-            if (p % i != 0)
-                continue;
-            List<List<Integer>> nn = new ArrayList<>(10);
-            get(p / i, n - 1, i, nn);
-            for (List<Integer> smaller : nn) {
-                List<Integer> newList = new ArrayList<>(16);
-                newList.add(i);
-                newList.addAll(smaller);
-                numbers.add(newList);
+            if (p % i == 0) {
+                List<Integer> ns = new ArrayList<>(sequence);
+                ns.add(i); // ignore return value
+                get(p / i, n - 1, i, ns, sequences);
             }
-            nn = null; //naive help to GC
         }
     }
 }
