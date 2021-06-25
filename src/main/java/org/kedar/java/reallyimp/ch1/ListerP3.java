@@ -22,7 +22,10 @@ public class ListerP3 {
     }
 
     private static void list(String dir, String ext) {
-        String[] names = new File(dir).list((folder, name) -> name.endsWith(ext));
+        File d = new File(dir);
+        if (! d.exists())
+            return;
+        String[] names = d.list((folder, name) -> name.endsWith(ext));
         for (String name : names)
             System.out.println(name);
     }
