@@ -35,7 +35,10 @@ public class ListerP4 {
     }
 
     private static void listNoBehaviorParameterization(String dir) {
-        File[] files = new File(dir).listFiles();
+        File d = new File(dir);
+        if (! d.exists())
+            return;
+        File[] files = d.listFiles();
         Arrays.sort(files, (f, g) -> {
             if (f.isDirectory()) {
                 if (g.isDirectory())
@@ -51,8 +54,11 @@ public class ListerP4 {
     }
 
     private static void listParametrizedSorting(String dir, Comparator<File> cmp) {
-        File[] files = new File(dir).listFiles();
-        Arrays.sort(files, (f, g) -> cmp.compare(f, g));
+        File d = new File(dir);
+        if (!d.exists())
+            return;
+        File[] files = d.listFiles();
+        Arrays.sort(files, cmp);
         listFiles(files);
     }
 
