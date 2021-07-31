@@ -1,24 +1,22 @@
 package practice;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static practice.Repetend.repetend;
 import static practice.euler.PrimeOrdinal.isPrime;
 
-class RepetendTest {
+public class RepetendTest {
 
     @Test
-    void largeReciprocal() {
+    public void largeReciprocal() {
         Repetend.Decimal r = repetend(1, 998001);
         System.out.println("non repeated len: " + r.nrep().length());
         System.out.println("repeated len: " + r.rep().length());
         System.out.println(r);
     }
+
     @Test
-    void repetendTest() {
+    public void repetendTest() {
         System.out.println(repetend(3227, 555));
         System.out.println(repetend(1, 7));
         System.out.println(repetend(1, 11));
@@ -29,7 +27,7 @@ class RepetendTest {
     }
 
     @Test
-    void longestRepUnitFraction() {
+    public void longestRepUnitFraction() {
         int max = 0;
         int lim = 100;
         for (int i = 1; i <= lim; i++) {

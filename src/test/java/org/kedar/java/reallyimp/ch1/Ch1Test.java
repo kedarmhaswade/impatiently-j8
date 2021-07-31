@@ -2,7 +2,6 @@ package org.kedar.java.reallyimp.ch1;
 
 import org.junit.Ignore;
 import org.junit.Test;
-import org.kedar.java.reallyimp.ch1.MainTester;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,6 +23,6 @@ public class Ch1Test {
                 EffectivelyFinalP8.class,
                 ForEachIfP9.class,
                 DefaultMethMessP12.class);
-        MainTester.testMains(ch1Classes.stream().filter(c -> !c.isAnnotationPresent(Ignore.class)).collect(Collectors.toList()));
+        org.kedar.java.reallyimp.ch1.MainTester.testMains(ch1Classes.stream().filter(c -> !c.isAnnotationPresent(Ignore.class)).collect(Collectors.toList()));
     }
 }
