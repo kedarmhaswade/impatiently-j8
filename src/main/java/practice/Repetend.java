@@ -1,9 +1,6 @@
 package practice;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.Collections.emptyList;
 
@@ -22,14 +19,20 @@ public class Repetend {
             this.nr = new ArrayList<>(nr);
             this.r = new ArrayList<>(r);
         }
+        public List<Integer> rep() {
+            return Collections.unmodifiableList(r);
+        }
+        public List<Integer> nrep() {
+            return Collections.unmodifiableList(nr);
+        }
         @Override
         public String toString() {
             return "0." + flatten(nr) + "[" + flatten(r) + "]";
         }
-        String rep() {
+        String repString() {
             return flatten(r);
         }
-        String nrep() {
+        String nonRepString() {
             return flatten(nr);
         }
         private static String flatten(List<Integer> xs) {
