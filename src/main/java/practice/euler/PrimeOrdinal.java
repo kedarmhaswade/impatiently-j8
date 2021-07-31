@@ -66,7 +66,7 @@ public class PrimeOrdinal {
      *
      * @return <code>true</code> if the given positive integer is prime, <code>false</code> otherwise
      */
-    static boolean isPrime(long n) {
+    public static boolean isPrime(long n) {
         int limit = 25;
         char[] sieve = sieve(limit);
         if (n <= limit) {
