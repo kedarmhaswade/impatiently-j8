@@ -71,7 +71,7 @@ public class RepetendTest {
         assertEquals(expectedNonRep, repetend.nrep());
         assertEquals(expectedRep, repetend.rep());
 
-        n = 3227;
+        n = 3227; // Wikipedia example
         d = 555;
         repetend = repetend(n, d);
         expectedNonRep = Collections.singletonList(8);
