@@ -10,32 +10,32 @@ import static java.util.Collections.unmodifiableList;
 
 /**
  * <p>
- * Explores the Pratyaahaaraas based on {@linkplain practice.ShivaSutra ShivaSutraani}. Since everything is fixed by the fourteen
- * शिवसूत्राणि, Pratyaahaaraas are also fixed and, as such, they can themselves be enums, but we choose to run a program to deal with
+ * Explores the प्रत्याहाराः based on {@linkplain practice.ShivaSutra शिवसूत्राणि}. Since everything is fixed by the fourteen
+ * शिवसूत्राणि, प्रत्याहाराः are also fixed and, as such, they can themselves be enums, but we choose to run a program to deal with
  * them as listing them manually would be rather cumbersome. This class has some utilities to aid this exploration.
  * </p>
  * <p>
- * A Pratyaahaara is formed by following these simple rules:
+ * A प्रत्याहारः is formed by following these simple rules:
  * <ol>
  *     <li>
- *         A Pratyaahaara has two characters (first, last). Their concatenation is the <i>name</i> of that Pratyaahaara.
- *         A Pratyaahaara is made from two ShivaSutra which may be the same.
+ *         A प्रत्याहारः has two characters (first, last). Their concatenation is the <i>name</i> of that प्रत्याहारः.
+ *         A प्रत्याहारः is made from two शिवसूत्रे which may be the same.
  *     </li>
  *     <li>
- *         Choose a {@linkplain ShivaSutra} as its first ShivaSutra. Choose another ShivaSutra, whose
- *     {@linkplain ShivaSutra#order order} is not less than that of its first, as its last ShivaSutra.
+ *         Choose a {@linkplain ShivaSutra शिवसूत्र} as its first शिवसूत्र. Choose another शिवसूत्र, whose
+ *     {@linkplain ShivaSutra#order order} is not less than that of its first, as its last शिवसूत्र.
  *     </li>
  *     <li>
- *         The first character of a Pratyaahaara is any letter except the last letter of the first ShivaSutra that makes it. <br>
- *         The last character of a Pratyaahaara is the last letter of the second शिवसूत्र that makes it. <br>
- *         The {@linkplain #getCoveredCharacters() characters covered} by a Pratyaahaara is a concatenation of all the characters covered by its {@linkplain #first first
- *         ShivaSutra} from the {@linkplain #startsWith starting character} and the covered characters by all the
- *         remaining ShivaSutraani up to the {@linkplain #last last ShivaSutra} <b> in order</b>.
+ *         The first character of a प्रत्याहारः is any letter except the last letter of the first शिवसूत्र that makes it. <br>
+ *         The last character of a प्रत्याहारः is the last letter of the second शिवसूत्र that makes it. <br>
+ *         The {@linkplain #getCoveredCharacters() characters covered} by a प्रत्याहारः is a concatenation of all the characters covered by its {@linkplain #first first
+ *         शिवसूत्र} from the {@linkplain #startsWith starting character} and the covered characters by all the
+ *         remaining शिवसूत्राणि up to the {@linkplain #last last शिवसूत्र} <b> in order</b>.
  *     </li>
  *     <li>
- *         Reject any Pratyaahaara thus formed if it does not have any character that intervenes its first character
- *         and its second character. In other words, if a Pratyaahaara can be formed by following above rules but it has
- *         a length of 2, then reject it. This is because of Panini.
+ *         Reject any प्रत्याहारः thus formed if it does not have any character that intervenes its first character
+ *         and its second character. In other words, if a प्रत्याहारः can be formed by following above rules but it has
+ *         a length of 2, then reject it. This is because of पाणिनि.
  *     </li>
  * </ol>
  * </p>
@@ -107,7 +107,7 @@ public final class Pratyaahaara {
     }
 
     /**
-     * Returns the characters covered by this Pratyaahaara.
+     * Returns the characters covered by this प्रत्याहारः.
      * @return
      */
     public List<Character> getCoveredCharacters() {
@@ -115,7 +115,7 @@ public final class Pratyaahaara {
     }
 
     /**
-     * Panini does not recognize a one-character Pratyaahaara.
+     * Panini does not recognize a one-character प्रत्याहारः.
      * @return true if the number of {@linkplain #getCoveredCharacters() covered characters} is two or more.
      */
     public boolean isPanineya() {

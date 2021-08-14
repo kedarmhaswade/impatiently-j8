@@ -7,10 +7,10 @@ import java.util.List;
 import static java.util.Collections.unmodifiableList;
 
 /**
- * An enum for Panini's ShivaSutraani. Each ShivaSutra is in a class (or enum) of its own! A ShivaSutra ends with a VIRAMA
+ * An enum for पाणीनि's शिवसूत्राणि. Each शिवसूत्र is in a class (or enum) of its own! A शिवसूत्र ends with a विराम
  * which is recognized as an independent character by the Unicode consortium. In other words, a consonant like
  * ल् is not a single unicode code point, but two code points: 'ल', and '्' (the विराम character: 0x94D), even though
- * ल् is usually regarded as a single consonant in the Devanaagarii script.
+ * ल् is usually regarded as a single consonant in the देवनागरी script.
  */
 public enum ShivaSutra {
     ONE(1, "अइउण्"),
