@@ -1,0 +1,11 @@
+Windows is weird even in 2021.
+
+Do
+
+JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8 mvn clean install
+
+if you see the stupid
+
+unmappable character (0x8D) for encoding windows-1252
+
+error on maven compilation.
