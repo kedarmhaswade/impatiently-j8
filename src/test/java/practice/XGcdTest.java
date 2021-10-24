@@ -44,4 +44,14 @@ public class XGcdTest {
         assertEquals(-13, xgcd[1]); // y
     }
 
+    @Test
+    public void bookExample() {
+        int a = 60;
+        int b = 42;
+        int[] xgcd = xgcd(a, b);
+        assertEquals(6, xgcd[2]); // the GCD
+        assertEquals(-2, xgcd[0]); // x
+        assertEquals(3, xgcd[1]); // y
+    }
+
 }

@@ -57,7 +57,7 @@ public class XGcd {
         }
         int x = coefficients.get(0)[0];
         int y = coefficients.get(0)[1];
-        assert a0 * x + b0 * y == g; // the so-called Bézout's identity
+        assert a0 * x + b0 * y == g; // one instance of the so-called Bézout's identity
         return new int[]{x, y, g};
     }
 }
