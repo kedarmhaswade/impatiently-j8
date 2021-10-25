@@ -1,8 +1,9 @@
 package practice;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+
+import static java.util.List.of;
 
 /**
  * <p>
@@ -42,28 +43,29 @@ public class AssociativeEnumeration {
 //    }
 
 
-    public static List<String> permutations(char[] e) {
-        return permutations(e, 0, e.length);
+    public static List<String> wrongAlgorithm(char[] e) {
+        return wrongAlgorithm(e, 0, e.length);
     }
-    private static List<String> permutations(char[] e, int i, int j) {
+
+    private static List<String> wrongAlgorithm(char[] e, int i, int j) {
         if (i == j - 2) {
-            return List.of(e[i] + MD + e[j - 1]);
+            return of(e[i] + MD + e[j - 1]);
         } else {
             List<String> curr = new ArrayList<>();
-            List<String> prev = permutations(e, i + 1, j);
+            List<String> prev = wrongAlgorithm(e, i + 1, j);
             for (String p : prev) {
                 String c = e[i] + MD + LP + p + RP;
                 curr.add(c);
             }
-            prev = permutations(e, i, j - 1);
+            prev = wrongAlgorithm(e, i, j - 1);
             for (String p : prev) {
                 String c = LP + p + RP + MD + e[j - 1];
                 curr.add(c);
             }
             if ((j - i) % 2 == 0) {
                 int m = i + j >>> 1;
-                List<String> left = permutations(e, i, m);
-                List<String> right = permutations(e, m, j);
+                List<String> left = wrongAlgorithm(e, i, m);
+                List<String> right = wrongAlgorithm(e, m, j);
                 for (String ls : left) {
                     for (String rs : right) {
                         String c = LP + ls + RP + MD + LP + rs + RP;
@@ -75,15 +77,43 @@ public class AssociativeEnumeration {
         }
     }
 
+    public static List<String> permutations(char[] e) {
+        return permutations(e, 0, e.length);
+    }
+
+    private static List<String> permutations(char[] e, int i, int j) {
+        if (i == j - 1) {
+            return of(Character.toString(e[i])); // return the character as a string, e.g. "a"
+        } else {
+            List<String> curr = new ArrayList<>();
+            for (int k = i + 1; k < j; k++) {
+                List<String> left = permutations(e, i, k);
+                List<String> right = permutations(e, k, j);
+                for (String ls : left) {
+                    for (String rs : right) {
+                        String l = ls.length() == 1 ? ls : LP + ls + RP;
+                        String r = rs.length() == 1 ? rs : LP + rs + RP;
+                        curr.add(l + MD + r);
+                    }
+                }
+            }
+            return curr;
+        }
+    }
+
     public static void main(String[] args) {
         List<String> p = null;
-        p = permutations(new char[]{'a', 'b', 'c', 'd', 'e'});
-        System.out.println(p.size() + ": " + p);
         p = permutations(new char[]{'a', 'b'});
         System.out.println(p.size() + ": " + p);
         p = permutations(new char[]{'a', 'b', 'c'});
         System.out.println(p.size() + ": " + p);
+        p = permutations(new char[]{'a', 'b', 'c', 'd'});
+        System.out.println(p.size() + ": " + p);
+        p = permutations(new char[]{'a', 'b', 'c', 'd', 'e'});
+        System.out.println(p.size() + ": " + p);
         p = permutations(new char[]{'a', 'b', 'c', 'd', 'e', 'f'});
+        System.out.println(p.size() + ": " + p);
+        p = permutations(new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g'});
         System.out.println(p.size() + ": " + p);
     }
 }
