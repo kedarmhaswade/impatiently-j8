@@ -57,37 +57,33 @@ public class PrimeOrdinal {
      * this on Project Euler.
      * </p>
      * <p>
-     * Basic idea is to maintain the primality of small numbers as a cache (say first 25 natural numbers) and then
-     * <li> Exploit the fact that for a number n to be prime, we should just check if a prime number p less than
-     * sqrt(n) divides n. </li>
      * <li> Use a corollary that all prime numbers greater than 3 can be expressed as 6*k+/-1. This will involve
      * checking divisibility of n by many non prime numbers (e.g. 35), but that is okay for a naive algorithm.</li>
      * </p>
      *
-     * @return <code>true</code> if the given positive integer is prime, <code>false</code> otherwise
+     * @return <code>-1</code> is the number is prime, otherwise the first prime factor of the argument
+     * <s> <code>true</code> if the given positive integer is prime, <code>false</code> otherwise </s>
      */
-    public static boolean isPrime(long n) {
-        int limit = 25;
-        char[] sieve = sieve(limit);
-        if (n <= limit) {
-            return sieve[(int) n] == PRIME;
-        }
-        if (n % 2 == 0 || n % 3 == 0)
-            return false;
+    public static long isPrime(long n) {
+        if (n % 2 == 0)
+            return 2L;
+        if (n % 3 == 0)
+            return 3L;
         long p = 5;
         long r = (long) Math.sqrt(n);
         while (p <= r) {
-            if ((n % p == 0) || (n % (p + 2) == 0))
-                return false;
+            if ((n % p == 0) || (n % (p + 2) == 0)) {
+                return p;
+            }
             p += 6;
         }
-        return true;
+        return -1L;
     }
     static long nthPrime(int nth) {
         int cnt = 0;
         int p = 2;
         while (true) {
-            if (isPrime(p)) {
+            if (isPrime(p) == -1L) {
                 cnt +=1;
 //                System.out.println("p: " + p + ", cnt: " + cnt);
                 if (cnt == nth)

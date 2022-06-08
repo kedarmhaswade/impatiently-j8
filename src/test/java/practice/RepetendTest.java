@@ -45,7 +45,7 @@ public class RepetendTest {
         Repetend.Decimal rep = repetend(1, max);
         System.out.println("max: " + max + " -- " + rep);
 //        System.out.println("repetend length: " + rep.r.size());
-        System.out.println("is it prime? -- " + isPrime(max));
+        System.out.println("is it prime? -- " + (isPrime(max) == 1L ? "true" : "false"));
     }
 
     @Test
