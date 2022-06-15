@@ -18,25 +18,25 @@ public class AdditiveCombinationsTest {
     public void testCount1() throws Exception {
         Set<Integer> set = Sets.newHashSet(2, 3, 7);
         assertEquals(7L, (long) countBottomUp(set, 9));
-        assertEquals(7L, (long) countTopDown(set, 9));
+        assertEquals(7L, countTopDown(set, 9));
     }
     @Test
     public void testCount2() throws Exception {
         Set<Integer> set = Sets.newHashSet(1, 2, 3);
         assertEquals(13L, (long) countBottomUp(set, 5));
-        assertEquals(13L, (long) countTopDown(set, 5));
+        assertEquals(13L, countTopDown(set, 5));
     }
     @Test
     public void testCount3() throws Exception {
         Set<Integer> set = Sets.newHashSet(2, 3, 7);
         assertEquals(1185739173L, (long) countBottomUp(set, 222));
-        assertEquals(1185739173L, (long) countTopDown(set, 222));
+        assertEquals(1185739173L, countTopDown(set, 222));
     }
     @Test
     public void testCount4() throws Exception {
         Set<Integer> set = Sets.newHashSet(2, 3, 7);
         assertEquals(18L, (long) countBottomUp(set, 12));
-        assertEquals(18L, (long) countTopDown(set, 12));
+        assertEquals(18L, countTopDown(set, 12));
     }
 
 }
