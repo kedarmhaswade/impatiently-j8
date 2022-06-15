@@ -13,7 +13,7 @@ class Util {
      * @param c
      * @return boolean true if a queen at b[r][c] would be attacked. Does not do any bound checking!
      */
-    static boolean isQueenSafe(int[][] b, int r, int c) {
+    static boolean isQueenSafeSlow(int[][] b, int r, int c) {
         return isQueenSafeRow(b, r) && isQueenSafeColumn(b, c) && isQueenSafeDiag(b, r, c);
     }
 
