@@ -9,15 +9,16 @@ import static cp.Util.*;
 public class NQueens {
 
     private static long nWays = 0;
+    private static int[][] b;
 
     public static long numWays(int n) {
         nWays = 0;
-        int[][] b = new int[n][n];
-        solve(n, b); // return value ignored
+        b = new int[n][n];
+        solve(n); // return value ignored
         return nWays;
     }
 
-    private static boolean solve(int n, int[][] b) {
+    private static boolean solve(int n) {
         if (n == 0) {
             return true;
         }
@@ -25,10 +26,10 @@ public class NQueens {
         for (int i = 0; i < b[r].length; i++) {
             if (isQueenSafeSlow(b, r, i)) {
                 b[r][i] = 1;
-                if (solve(n - 1, b)) {
+                if (solve(n - 1)) {
                     nWays += 1;
                 }
-                b[r][i] = 0; // backtrack
+                b[r][i] = 0;
             }
         }
         return false;
