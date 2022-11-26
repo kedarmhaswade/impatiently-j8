@@ -52,4 +52,10 @@ public class FasterNQueens {
             d2.remove(col - row);
         }
     }
+
+    public static void main(String[] args) {
+        int n = Integer.valueOf(args[0]);
+        System.out.println("n = " + n);
+        System.out.println("nWays = " + numWays(n));
+    }
 }
