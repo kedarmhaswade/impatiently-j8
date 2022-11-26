@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Implements the Sage-Math function <code>xgcd(a, b)</code> that takes two non negative integers <code>a, b, b ≠ 0</code>
+ * Implements the Sage-Math function <code>xgcd(a, b)</code> that takes two non-negative integers <code>a, b, b ≠ 0</code>
  * and returns three integers, <code>x, y, g</code>, such that,
  * <ul>
  *     <li> g is the greatest common divisor of <code>a, b</code>, i.e. <code>g = gcd(a, b)</code></li>
