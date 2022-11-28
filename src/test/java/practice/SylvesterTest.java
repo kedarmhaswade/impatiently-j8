@@ -2,7 +2,6 @@ package practice;
 
 import org.junit.Test;
 
-import java.util.Collections;
 import java.util.List;
 
 import static java.lang.String.format;
@@ -74,7 +73,7 @@ public class SylvesterTest {
         List<Long> e = List.of(2L);
         long n = 1;
         long d = 2;
-        List<Long> units = ufs(n, d); // 69/70 as a sum of unit fractions
+        List<Long> units = ufs(n, d);
         assertEquals(format("Unit fraction denominators expected: %s, actual:%s%n", e, units), e, units);
         System.out.println(toStr(n, d, units));
         assertTrue("verification fails!", verify(n, d, e));
@@ -84,7 +83,18 @@ public class SylvesterTest {
         List<Long> e = List.of(2L);
         long n = 1L<<40;
         long d = 1L<<41;
-        List<Long> units = ufs(n, d); // 69/70 as a sum of unit fractions
+        List<Long> units = ufs(n, d);
+        assertEquals(format("Unit fraction denominators expected: %s, actual:%s%n", e, units), e, units);
+        System.out.println(toStr(n, d, units));
+        assertTrue("verification fails!", verify(n, d, e));
+    }
+
+    @Test
+    public void test1() {
+        List<Long> e = List.of(1L);
+        long n = 2;
+        long d = 2;
+        List<Long> units = ufs(n, d);
         assertEquals(format("Unit fraction denominators expected: %s, actual:%s%n", e, units), e, units);
         System.out.println(toStr(n, d, units));
         assertTrue("verification fails!", verify(n, d, e));

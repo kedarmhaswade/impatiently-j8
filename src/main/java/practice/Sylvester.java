@@ -25,7 +25,9 @@ public class Sylvester {
             if (n == 1) {
                 break;
             }
-            long u = (d / n) + 1; // greatest unit fraction smaller than the given fraction
+            long u = (long) Math.ceil(1.0 * d / n); // greatest unit fraction smaller than the given fraction
+//          long u = (d / n) + 1; // greatest unit fraction smaller than the given fraction
+            // long division + 1 should work as well, but I am favoring the use of ceil function
             units.add(u);
             long g = euclid(d, u);
             long lcm = Math.multiplyExact(g, Math.multiplyExact(d / g, u / g)); // bail - possibly inevitable overflow
