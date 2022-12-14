@@ -99,4 +99,39 @@ public class SylvesterTest {
         System.out.println(toStr(n, d, units));
         assertTrue("verification fails!", verify(n, d, e));
     }
+    @Test (expected = IllegalArgumentException.class)
+    public void testDenominator0() {
+        List<Long> e = List.of(1L);
+        long n = 0;
+        long d = 0;
+        List<Long> units = ufs(n, d);
+        System.out.println(toStr(n, d, units));
+    }
+    @Test (expected = UnsupportedOperationException.class)
+    public void testImproper() {
+        List<Long> e = List.of(1L);
+        long n = 5;
+        long d = 3;
+
+        List<Long> units = ufs(n, d);
+        System.out.println(toStr(n, d, units));
+    }
+    @Test (expected = IllegalArgumentException.class)
+    public void testDenNegative() {
+        List<Long> e = List.of(1L);
+        long n = -4;
+        long d = 7;
+        List<Long> units = ufs(n, d);
+        System.out.println(toStr(n, d, units));
+    }
+    @Test
+    public void testNegatives() {
+        List<Long> e = List.of(1L);
+        long n = -4;
+        long d = -7;
+        List<Long> units = ufs(n, d);
+        assertEquals(2L, units.get(0).longValue());
+        assertEquals(14L, units.get(1).longValue());
+    }
+
 }

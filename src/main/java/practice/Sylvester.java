@@ -15,7 +15,27 @@ import static java.lang.String.format;
  */
 public class Sylvester {
 
+    /**
+     * Returns the unit fractions of a proper positive fraction whose numerator is n and denominator (≠ 0).
+     *
+     * @param n
+     * @param d
+     * @return
+     */
     static List<Long> ufs(long n, long d) {
+        if (n < 0 && d > 0) {
+            throw new IllegalArgumentException("either both n and d must be positive or both must be negative");
+        }
+        if (n < 0 && d < 0) {
+            n = -n;
+            d = -d;
+        }
+        if (n > d) {
+            throw new UnsupportedOperationException("not yet tested for improper fractions");
+        }
+        if (d == 0) {
+            throw new IllegalArgumentException("division by 0");
+        }
         List<Long> units = new ArrayList<>(4);
         do {
             long gcd = euclid(d, n); // euclid(n, d) is okay too, perhaps marginally slower
