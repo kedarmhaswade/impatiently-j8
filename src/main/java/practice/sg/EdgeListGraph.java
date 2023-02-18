@@ -1,7 +1,10 @@
 package practice.sg;
 
+import practice.sg.Graphs.EdgeType;
+
 import java.util.*;
-import java.util.stream.Collectors;
+
+import static practice.sg.Graphs.EdgeType.UNDIRECTED;
 
 /**
  * <p>
@@ -16,30 +19,41 @@ import java.util.stream.Collectors;
  * <p>
  * An EdgeListGraph can be directed or undirected.
  * </p>
- * <p>Here is the textual representation of an example graph: </p>
- * <pre>
- *     {"AGraph", {{1, 4}, {1, 5}, {1, 6}, {2, 5}, {2, 6}, {3, 6}, {4, 1}, {5, 1}, {5, 2}, {6, 1}, {6, 2}, {6, 3}}}
- * </pre>
  */
-public class EdgeListGraph<T extends Comparable<T>> {
-    private final Set<T> vertices;
-    private final List<? super Edge<T>> edges;
-    private final Map<T, List<Edge<T>>> neighbors; // trading some space for efficiency
+public final class EdgeListGraph {
+    private final Set<Integer> vertices;
+    /**
+     * This is the main data structure of this graph regardless of whether it's a directed or undirected graph.
+     */
+    private final Map<Integer, List<Integer>> adjList;
+    private final int order; // this is a "derived characteristic of the graph
+    private final EdgeType eType;
 
-    public EdgeListGraph(List<Edge<T>> edges) {
-        List<? super Edge<T>> tmp = new ArrayList<>(edges.size());
-        Collections.copy(tmp, edges);
-        this.edges = Collections.unmodifiableList(tmp);
-        vertices = new HashSet<>();
-        edges.forEach(e -> {
-            vertices.add(e.from);
-            vertices.add(e.to);
-        });
-        this.neighbors = edges.stream().collect(Collectors.groupingBy(Edge::getFrom));
+    public EdgeListGraph(List<EdgeSpec> specList, EdgeType eType) {
+        this.eType = eType;
+        this.vertices = new HashSet<>();
+        this.adjList = new HashMap<>();
+        int eCount = 0;
+        for (EdgeSpec spec : specList) {
+            eCount += 1;
+            vertices.add(spec.getFrom());
+            vertices.add(spec.getTo());
+            adjList.putIfAbsent(spec.getFrom(), new ArrayList<>());
+            adjList.get(spec.getFrom()).add(spec.getTo());
+            if (eType == UNDIRECTED) { // add the edge for both vertices
+                adjList.putIfAbsent(spec.getTo(), new ArrayList<>());
+                adjList.get(spec.getTo()).add(spec.getFrom());
+            }
+        }
+        this.order = eCount;
     }
 
-    public List<Edge<T>> adj(T src) {
-        return this.neighbors.get(src);
+    public static EdgeListGraph of(List<EdgeSpec> edges, EdgeType eType) {
+        return new EdgeListGraph(edges, eType);
+    }
+
+    public List<Integer> neighbor(int src) {
+        return this.adjList.get(src);
     }
 
     public long size() {
@@ -47,7 +61,7 @@ public class EdgeListGraph<T extends Comparable<T>> {
     }
 
     public long order() {
-        return edges.size();
+        return order;
     }
 
 
@@ -61,5 +75,50 @@ public class EdgeListGraph<T extends Comparable<T>> {
     or assume a starting node when we find that there are some unreachable nodes after a run of bfs. However,
     the caller does not know a priori how many connected components a graph has. Finding connected components
     is one of the applications of bfs. Therefore, a generally useful API for bfs is rather elusive.
+
+    After speaking with Apoorv, it became clear that perhaps we should design the API around a natural way of doing
+    things. First off, a call to bfs should only concern the component of the graph of which the starting node is a part.
+    The issue of bfs not identifying all the components can be left to the clients.
      */
+
+    public boolean bfs(int s, int[] d, int[] p) {
+        // returns true if the number of nodes reached == size of the graph, false otherwise
+        // historical note: While implementing this method I un-generified this class. I gave up the notion that
+        // the graph vertices should be of some generic type that is "Comparable" in favor of plain integers.
+        // The need was felt for the distance and parent arrays which would be generic arrays and the simplicity of
+        // these 1-D arrays representing 2-D data structure like a tree (e.g. the bfs tree) comes from the fact
+        // that nodes are integers.
+        int sz = vertices.size();
+        if (d.length <= sz) {
+            throw new IllegalArgumentException("the distance array size must be > the number of vertices: " + sz);
+        }
+        if (p.length <= sz) {
+            throw new IllegalArgumentException("the bfs tree array size must be > the number of vertices: " + sz);
+        }
+        Deque<Integer> q = new ArrayDeque<>(sz);
+        Set<Integer> v = new HashSet<>(vertices.size());
+        q.add(s); // start at the very beginning
+        v.add(s);
+        d[s] = 0;
+        p[s] = -1; // starting node has no parent
+        int numVisited = 1;
+        while (!q.isEmpty()) {
+            int curr = q.poll();
+            List<Integer> cNebs = this.adjList.get(curr);
+            if (cNebs == null) {
+                continue;
+            }
+            for (Integer other : cNebs) {
+                if (v.contains(other)) {
+                    continue;
+                }
+                q.add(other);
+                v.add(other);
+                numVisited++;
+                d[other] = d[curr] + 1;
+                p[other] = curr;
+            }
+        }
+        return numVisited == vertices.size();
+    }
 }
