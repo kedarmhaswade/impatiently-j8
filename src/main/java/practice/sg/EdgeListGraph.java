@@ -19,6 +19,8 @@ import static practice.sg.Graphs.EdgeType.UNDIRECTED;
  * <p>
  * An EdgeListGraph can be directed or undirected.
  * </p>
+ *
+ * @see EdgeSpec
  */
 public final class EdgeListGraph {
     private final Set<Integer> vertices;
@@ -26,7 +28,7 @@ public final class EdgeListGraph {
      * This is the main data structure of this graph regardless of whether it's a directed or undirected graph.
      */
     private final Map<Integer, List<Integer>> adjList;
-    private final int order; // this is a "derived characteristic of the graph
+    private final int order; // this is a "derived" characteristic of the graph
     private final EdgeType eType;
 
     public EdgeListGraph(List<EdgeSpec> specList, EdgeType eType) {

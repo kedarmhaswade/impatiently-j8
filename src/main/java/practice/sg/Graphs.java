@@ -30,4 +30,14 @@ public final class Graphs {
             EdgeSpec.of(5, 1), EdgeSpec.of(5, 2),
             EdgeSpec.of(6, 1), EdgeSpec.of(6, 2), EdgeSpec.of(6, 3)), DIRECTED
     );
+
+    public static final EdgeListGraph BullGraphUndirected = EdgeListGraph.
+        of(
+            List.of(
+                // Head
+                EdgeSpec.of(1, 4), EdgeSpec.of(1, 5), EdgeSpec.of(4, 5), EdgeSpec.of(2, 4), EdgeSpec.of(3, 5),
+                // Body
+                EdgeSpec.of(6, 7), EdgeSpec.of(6, 8), EdgeSpec.of(8, 9)
+            ), UNDIRECTED
+        );
 }
