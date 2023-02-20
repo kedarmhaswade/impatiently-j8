@@ -38,6 +38,10 @@ public final class EdgeSpec {
         return new EdgeSpec(from, to, 0);
     }
 
+    public EdgeSpec reverse() {
+        return of(this.getTo(), this.getFrom(), this.getWeight());
+    }
+
     public int getFrom() {
         return from;
     }

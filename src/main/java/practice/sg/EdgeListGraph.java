@@ -3,6 +3,7 @@ package practice.sg;
 import practice.sg.Graphs.EdgeType;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static practice.sg.Graphs.EdgeType.UNDIRECTED;
 
@@ -25,8 +26,9 @@ import static practice.sg.Graphs.EdgeType.UNDIRECTED;
 public final class EdgeListGraph {
     /**
      * This is the main data structure of this graph regardless of whether it's a directed or undirected graph.
+     * We retain the entire {@linkplain EdgeSpec} instance so that we have access to edge weights.
      */
-    private final Map<Integer, Set<Integer>> adjList;
+    private final Map<Integer, Set<EdgeSpec>> adjList;
     private final int order; // this is a "derived" characteristic of the graph
     private final EdgeType eType;
 
@@ -37,10 +39,10 @@ public final class EdgeListGraph {
         for (EdgeSpec spec : specList) {
             eCount += 1;
             adjList.putIfAbsent(spec.getFrom(), new HashSet<>());
-            adjList.get(spec.getFrom()).add(spec.getTo());
+            adjList.get(spec.getFrom()).add(spec);
             if (eType == UNDIRECTED) { // add the edge for both vertices
                 adjList.putIfAbsent(spec.getTo(), new HashSet<>());
-                adjList.get(spec.getTo()).add(spec.getFrom()); // TODO: what about weights?
+                adjList.get(spec.getTo()).add(spec.reverse());
             }
         }
         this.order = eCount;
@@ -51,7 +53,7 @@ public final class EdgeListGraph {
     }
 
     public Set<Integer> neighbor(int src) {
-        return this.adjList.get(src);
+        return this.adjList.get(src).stream().map(EdgeSpec::getTo).collect(Collectors.toSet());
     }
 
     public int size() {
@@ -59,9 +61,12 @@ public final class EdgeListGraph {
     }
 
     public int order() {
-        return order;
+        return this.order;
     }
 
+    private EdgeType getType() {
+        return this.eType;
+    }
 
     /*
     Implementation note: Deciding a signature of the method for breadth first search is challenging.
@@ -102,7 +107,7 @@ public final class EdgeListGraph {
         int numVisited = 1;
         while (!q.isEmpty()) {
             int curr = q.poll();
-            Set<Integer> cNebs = this.adjList.get(curr);
+            Set<Integer> cNebs = this.neighbor(curr);
             if (cNebs == null) {
                 continue;
             }
