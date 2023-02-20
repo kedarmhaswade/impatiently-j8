@@ -23,7 +23,6 @@ import static practice.sg.Graphs.EdgeType.UNDIRECTED;
  * @see EdgeSpec
  */
 public final class EdgeListGraph {
-    private final Set<Integer> vertices;
     /**
      * This is the main data structure of this graph regardless of whether it's a directed or undirected graph.
      */
@@ -33,18 +32,15 @@ public final class EdgeListGraph {
 
     public EdgeListGraph(List<EdgeSpec> specList, EdgeType eType) {
         this.eType = eType;
-        this.vertices = new HashSet<>();
         this.adjList = new HashMap<>();
         int eCount = 0;
         for (EdgeSpec spec : specList) {
             eCount += 1;
-            vertices.add(spec.getFrom());
-            vertices.add(spec.getTo());
-            adjList.putIfAbsent(spec.getFrom(), new ArrayList<>());
+            adjList.putIfAbsent(spec.getFrom(), new ArrayList<>()); // TODO: can't it be a set?
             adjList.get(spec.getFrom()).add(spec.getTo());
             if (eType == UNDIRECTED) { // add the edge for both vertices
                 adjList.putIfAbsent(spec.getTo(), new ArrayList<>());
-                adjList.get(spec.getTo()).add(spec.getFrom());
+                adjList.get(spec.getTo()).add(spec.getFrom()); // TODO: what about weights?
             }
         }
         this.order = eCount;
@@ -58,11 +54,11 @@ public final class EdgeListGraph {
         return this.adjList.get(src);
     }
 
-    public long size() {
-        return vertices.size();
+    public int size() {
+        return adjList.size(); // one mapping per vertex
     }
 
-    public long order() {
+    public int order() {
         return order;
     }
 
@@ -90,7 +86,7 @@ public final class EdgeListGraph {
         // The need was felt for the distance and parent arrays which would be generic arrays and the simplicity of
         // these 1-D arrays representing 2-D data structure like a tree (e.g. the bfs tree) comes from the fact
         // that nodes are integers.
-        int sz = vertices.size();
+        int sz = this.size();
         if (d.length <= sz) {
             throw new IllegalArgumentException("the distance array size must be > the number of vertices: " + sz);
         }
@@ -98,7 +94,7 @@ public final class EdgeListGraph {
             throw new IllegalArgumentException("the bfs tree array size must be > the number of vertices: " + sz);
         }
         Deque<Integer> q = new ArrayDeque<>(sz);
-        Set<Integer> v = new HashSet<>(vertices.size());
+        Set<Integer> v = new HashSet<>(sz);
         q.add(s); // start at the very beginning
         v.add(s);
         d[s] = 0;
@@ -121,6 +117,6 @@ public final class EdgeListGraph {
                 p[other] = curr;
             }
         }
-        return numVisited == vertices.size();
+        return numVisited == sz;
     }
 }
