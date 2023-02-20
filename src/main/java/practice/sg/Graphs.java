@@ -10,8 +10,6 @@ import static practice.sg.Graphs.EdgeType.UNDIRECTED;
  */
 public final class Graphs {
 
-    public enum EdgeType {DIRECTED, UNDIRECTED}
-
     public static final EdgeListGraph ButterflyGraphUndirected = EdgeListGraph.of(
         List.of(
             EdgeSpec.of(1, 2),
@@ -30,7 +28,6 @@ public final class Graphs {
             EdgeSpec.of(5, 1), EdgeSpec.of(5, 2),
             EdgeSpec.of(6, 1), EdgeSpec.of(6, 2), EdgeSpec.of(6, 3)), DIRECTED
     );
-
     public static final EdgeListGraph BullGraphUndirected = EdgeListGraph.
         of(
             List.of(
@@ -40,4 +37,6 @@ public final class Graphs {
                 EdgeSpec.of(6, 7), EdgeSpec.of(6, 8), EdgeSpec.of(8, 9)
             ), UNDIRECTED
         );
+
+    public enum EdgeType {DIRECTED, UNDIRECTED}
 }

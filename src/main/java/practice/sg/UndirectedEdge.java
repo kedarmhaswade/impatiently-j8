@@ -35,7 +35,7 @@ public final class UndirectedEdge {
         if (ends().contains(end)) {
             return between[0] == end ? between[1] : between[0];
         }
-        throw new AssertionError("illegal end: " + end + " for the edge: " + this.toString());
+        throw new AssertionError("illegal end: " + end + " for the edge: " + this);
     }
 
     @Override

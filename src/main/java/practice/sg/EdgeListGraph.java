@@ -26,7 +26,7 @@ public final class EdgeListGraph {
     /**
      * This is the main data structure of this graph regardless of whether it's a directed or undirected graph.
      */
-    private final Map<Integer, List<Integer>> adjList;
+    private final Map<Integer, Set<Integer>> adjList;
     private final int order; // this is a "derived" characteristic of the graph
     private final EdgeType eType;
 
@@ -36,10 +36,10 @@ public final class EdgeListGraph {
         int eCount = 0;
         for (EdgeSpec spec : specList) {
             eCount += 1;
-            adjList.putIfAbsent(spec.getFrom(), new ArrayList<>()); // TODO: can't it be a set?
+            adjList.putIfAbsent(spec.getFrom(), new HashSet<>());
             adjList.get(spec.getFrom()).add(spec.getTo());
             if (eType == UNDIRECTED) { // add the edge for both vertices
-                adjList.putIfAbsent(spec.getTo(), new ArrayList<>());
+                adjList.putIfAbsent(spec.getTo(), new HashSet<>());
                 adjList.get(spec.getTo()).add(spec.getFrom()); // TODO: what about weights?
             }
         }
@@ -50,7 +50,7 @@ public final class EdgeListGraph {
         return new EdgeListGraph(edges, eType);
     }
 
-    public List<Integer> neighbor(int src) {
+    public Set<Integer> neighbor(int src) {
         return this.adjList.get(src);
     }
 
@@ -102,7 +102,7 @@ public final class EdgeListGraph {
         int numVisited = 1;
         while (!q.isEmpty()) {
             int curr = q.poll();
-            List<Integer> cNebs = this.adjList.get(curr);
+            Set<Integer> cNebs = this.adjList.get(curr);
             if (cNebs == null) {
                 continue;
             }
