@@ -6,8 +6,7 @@ import java.util.Arrays;
 import java.util.Set;
 
 import static org.junit.Assert.*;
-import static practice.sg.Graphs.BullGraphUndirected;
-import static practice.sg.Graphs.ButterflyGraphUndirected;
+import static practice.sg.Graphs.*;
 
 public class EdgeListGraphTest {
 
@@ -71,11 +70,36 @@ public class EdgeListGraphTest {
         int[] ep = new int[]{-1, 5, 4, 5, 5, -1, 0, 0, 0, 0}; // expected bfs tree, starting node has no parent
         assertArrayEquals("distance array after first is: " + Arrays.toString(ed), ed, d);
         assertArrayEquals("bfs tree array is: " + Arrays.toString(ep), ep, p);
+        // a second run
         start = 9;
         coversAllVertices = g.bfs(start, d, p);
         assertFalse("bfs second run also does not cover all the vertices", coversAllVertices);
         // only the head is identified after first bfs because the starting node is in that component
         ed = new int[]{-1, 1, 2, 1, 1, 0, 2, 3, 1, 0}; // expected distances
         ep = new int[]{-1, 5, 4, 5, 5, -1, 8, 6, 9, -1}; // expected bfs tree, starting node has no parent
+        assertArrayEquals("distance array after second run is: " + Arrays.toString(ed), ed, d);
+        assertArrayEquals("bfs tree after second run is: " + Arrays.toString(ep), ep, p);
+    }
+    @Test
+    public void directedJNPTestGraphBfsTest() {
+        EdgeListGraph g = JNPTestGraph;
+        int es = 7;
+        assertEquals("JNP Test graph #nodes: " + es, es, g.size());
+        int eo = 10;
+        assertEquals("JNP Test graph #edges: " + eo, eo, g.order());
+        int[] d = new int[es + 1];
+        d[0] = -1; // node w number 0 does not exist
+        int[] p = new int[es + 1];
+        p[0] = -1; // node w number 0 has no parent
+        int start = 4;
+        d[start] = 0;
+        p[start] = -1;
+        boolean coversAllVertices = g.bfs(start, d, p);
+        assertTrue("bfs first run covers all the vertices", coversAllVertices);
+
+        int[] ed = new int[]{-1, 3, 2, 1, 0, 2, 1, 2}; // expected distances
+        int[] ep = new int[]{-1, 5, 3, 4, -1, 3, 4, 6}; // expected bfs tree, starting node has no parent
+        assertArrayEquals("distance array is: " + Arrays.toString(ed), ed, d);
+        assertArrayEquals("bfs tree array is: " + Arrays.toString(ep), ep, p);
     }
 }

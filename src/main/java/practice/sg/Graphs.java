@@ -38,5 +38,17 @@ public final class Graphs {
             ), UNDIRECTED
         );
 
+    public static final EdgeListGraph JNPTestGraph = EdgeListGraph.
+        of(
+            List.of(
+                EdgeSpec.of(1, 2),
+                EdgeSpec.of(2, 5),
+                EdgeSpec.of(3, 2), EdgeSpec.of(3, 5),
+                EdgeSpec.of(4, 3), EdgeSpec.of(4, 6),
+                EdgeSpec.of(5, 1),
+                EdgeSpec.of(6, 5), EdgeSpec.of(6, 7),
+                EdgeSpec.of(7, 2)
+            ), DIRECTED
+        );
     public enum EdgeType {DIRECTED, UNDIRECTED}
 }
