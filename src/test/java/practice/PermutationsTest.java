@@ -8,7 +8,7 @@ import static java.util.Arrays.*;
 import static java.util.Collections.EMPTY_LIST;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static practice.Fuzlur.ARITHMETIC_OPERATORS;
+import static practice.Fazlur.ARITHMETIC_OPERATORS;
 import static practice.Permutations.*;
 
 /**

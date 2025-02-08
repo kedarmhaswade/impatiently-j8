@@ -1,19 +1,19 @@
 package practice;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import static java.util.Map.entry;
 import static java.util.Map.ofEntries;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 import static practice.InstantInsanity.*;
 import static practice.InstantInsanity.Color.*;
 import static practice.InstantInsanity.Direction.COUNTERCLOCKWISE;
 import static practice.InstantInsanity.Face.*;
-import static practice.InstantInsanity.RotAxis.*;
+import static practice.InstantInsanity.RotAxis.X;
 
 public class InstantInsanityTest {
 
@@ -25,11 +25,12 @@ public class InstantInsanityTest {
         Map<Face, Color> map = ofEntries(entry(NORTH, GREEN), entry(WEST, BLUE), entry(SOUTH, GREEN),
             entry(EAST, RED), entry(TOP, WHITE), entry(BOTTOM, BLUE));
         Cube act = new Cube(map);
-        assertEquals(exp, act, "cubes should be the same");
-        assertEquals(expConfig, act.getConfig(), "configs are different -- actual: " + act.getConfig() + ", exp: " + expConfig);
+        assertEquals("cubes should be the same", exp, act);
+        assertEquals(" \"configs are different -- actual: \" + act.getConfig() + \", exp: \" + expConfig", expConfig, act.getConfig());
     }
 
-    @Test public void testRotate() {
+    @Test
+    public void testRotate() {
         // rotate "GBGRWB" by one turn ccw
         String origConfig = "GBGRWB";
         Cube orig = new Cube(origConfig);
@@ -48,7 +49,8 @@ public class InstantInsanityTest {
         assertEquals(expConfig, act.getConfig());
     }
 
-    @Test public void basicTowerTest() {
+    @Test
+    public void basicTowerTest() {
         Cube first = new Cube("GBGRWB");
         Cube second = new Cube("RWGBWG");
         Cube third = new Cube("WRGBRW");

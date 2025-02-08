@@ -82,7 +82,7 @@ enum Operator {
     }
 }
 
-public class Fuzlur {
+public class Fazlur {
 
     public static final List<Operator> ARITHMETIC_OPERATORS = List.of(ADDITION, SUBTRACTION, MULTIPLICATION, DIVISION); // could be a Set
     // UNARY operators are problematic, you can apply them over and over! For now, let me just apply it once.
@@ -90,15 +90,15 @@ public class Fuzlur {
     private final List<List<Object>> operandPermutations = new ArrayList<>();
 
     public static void main(String[] args) {
-//        new Fuzlur().solve(6, List.of(2, 2, 2));
-//        new Fuzlur().solve(6, List.of(3, 3, 3));
-//        new Fuzlur().solve(6, List.of(4, 4, 4));
-//        new Fuzlur().solve(6, List.of(5, 5, 5));
-//        new Fuzlur().solve(6, List.of(6, 6, 6));
-//        new Fuzlur().solve(6, List.of(7, 7, 7));
-//        new Fuzlur().solve(6, List.of(8, 8, 8));
-//        new Fuzlur().solve(6, List.of(9, 9, 9));
-        new Fuzlur().solve(24, List.of(1, 3, 4, 6));
+//        new Fazlur().solve(6, List.of(2, 2, 2));
+//        new Fazlur().solve(6, List.of(3, 3, 3));
+//        new Fazlur().solve(6, List.of(4, 4, 4));
+//        new Fazlur().solve(6, List.of(5, 5, 5));
+//        new Fazlur().solve(6, List.of(6, 6, 6));
+//        new Fazlur().solve(6, List.of(7, 7, 7));
+        new Fazlur().solve(6, List.of(8, 8, 8));
+        new Fazlur().solve(6, List.of(9, 9, 9));
+//        new Fazlur().solve(24, List.of(1, 3, 4, 6));
     }
 
     /*
@@ -182,6 +182,7 @@ public class Fuzlur {
     }
 
     public List<Object> solve(int a, List<Integer> operands) {
+        System.out.println("operands: " + operands);
         solveWithBasicArithmetic(a, operands);
         solveWithPopular(a, operands);
         return null;
@@ -189,28 +190,29 @@ public class Fuzlur {
 
     /**
      * <p>
-     * Uses only the operators in the set of {@link Fuzlur#ARITHMETIC_OPERATORS} for solution.
+     * Uses only the operators in the set of {@link Fazlur#ARITHMETIC_OPERATORS} for solution.
      * </p>
      *
      * @param a        the integer answer to which the operation is to be coerced
      * @param operands the list of integer operands
      */
     private void solveWithBasicArithmetic(int a, List<Integer> operands) {
-        System.out.println("operands: " + operands);
+        System.out.println("Using only the basic arithmetic operators");
         int nop = operands.size() - 1; // for n operands, we must have n-1 binary operators
         List<List<Operator>> operatorPermutations = kTuples(nop, ARITHMETIC_OPERATORS);
-        System.out.println("Number of operator perms: " + operatorPermutations.size());
-        System.out.println(operatorPermutations);
+//        System.out.println("Number of operator perms: " + operatorPermutations.size());
+//        System.out.println(operatorPermutations);
         evalPostfixes(a, operands, nop, operatorPermutations);
     }
 
     private void solveWithPopular(int a, List<Integer> operands) {
         // having both unary and binary operators complicates the matter!
+        System.out.println("Using the basic arithmetic operators and the square-root operator");
         for (int nop = operands.size() - 2; nop <= operands.size() + 1; nop++) {
             System.out.println("number of operators: " + nop);
             List<List<Operator>> operatorPermutations = kTuples(nop, POPULAR_OPERATORS);
-            System.out.println("Number of operator perms: " + operatorPermutations.size());
-            System.out.println(operatorPermutations);
+//            System.out.println("Number of operator perms: " + operatorPermutations.size());
+//            System.out.println(operatorPermutations);
             evalPostfixes(a, operands, nop, operatorPermutations);
         }
     }
@@ -221,21 +223,25 @@ public class Fuzlur {
         // consider operands : [6, 7, 8, 9] (length: nod)
         // binary operator permutation example: [+, ×, -] (length: nop)
         // expLen = nod + nop = 7
-        System.out.println("We can place " + nod + " operands in " + expLen + " locations in " + calculateNPK(expLen, nod) + " ways");
+//        System.out.println("We can place " + nod + " operands in " + expLen + " locations in " + calculateNPK(expLen, nod) + " ways");
         int[][] odLocations = nPk(expLen, nod); // these covers all permutations of nod operands in expLen locations
-        System.out.println("locations: " + Arrays.deepToString(odLocations));
+//        System.out.println("locations: " + Arrays.deepToString(odLocations));
         //Optimization: We must have an operand in the 0th index of the expression for it to be a valid postfix expression
         odLocations = Arrays.stream(odLocations).filter(array -> Arrays.stream(array).anyMatch(n -> n == 0)).toArray(int[][]::new);
-        System.out.println("locations: " + Arrays.deepToString(odLocations));
+//        System.out.println("locations: " + Arrays.deepToString(odLocations));
+        List<Object> oldExpr = null;
         for (int i = 0; i < odLocations.length; i++) {
             List<Object> expr = new ArrayList<>(Collections.nCopies(expLen, null));
-            int[] arrangement = odLocations[i];
+            int[] odArr = odLocations[i];
             // an example arrangement: [1, 4, 0, 5] (has one 0)
-            for (int j = 0; j < arrangement.length; j++) {
-                expr.set(arrangement[j], operands.get(j));
+            for (int j = 0; j < odArr.length; j++) {
+                expr.set(odArr[j], operands.get(j));
             }
             // operands are placed; example expr is now [8, 6, null, null, 7, 9, null]
             //                                            0    1  2   3    4  5  6
+            if (expr.equals(oldExpr)) {
+                continue; // Optimization: we have already seen these operators
+            }
             for (List<Operator> operatorPermutation : allOperators) {
                 // example operatorPermutation: [+, ×, -]
                 assert nop == operatorPermutation.size() : "Permutation: " + operatorPermutation + "size mismatch; exp: " + nop + ", actual: " + operatorPermutation.size();
@@ -268,6 +274,7 @@ public class Fuzlur {
                             k++;
                         }
                     }
+                    oldExpr = expr;
                 }
             }
         }
