@@ -60,6 +60,26 @@ enum Operator {
     public String toString() {
         return symbol;
     }
+
+    public String asInfix(Object first, Object... rest) {
+        switch (this) {
+            case ADDITION:
+            case SUBTRACTION:
+            case MULTIPLICATION:
+            case DIVISION:
+            case EXPONENTIATION:
+                return parenthesize(first + symbol + rest[0]);
+            case SQ_ROOT:
+            case NEGATION:
+                return parenthesize(symbol + first);
+            default:
+                throw new RuntimeException(symbol + ": Operation not implemented yet");
+        }
+    }
+
+    static String parenthesize(String m) {
+        return "(" + m + ")";
+    }
 }
 
 public class Fuzlur {
@@ -183,9 +203,10 @@ public class Fuzlur {
         System.out.println(operatorPermutations);
         evalPostfixes(a, operands, nop, operatorPermutations);
     }
+
     private void solveWithPopular(int a, List<Integer> operands) {
         // having both unary and binary operators complicates the matter!
-        for (int nop = operands.size() - 2; nop <=operands.size()+1; nop++) {
+        for (int nop = operands.size() - 2; nop <= operands.size() + 1; nop++) {
             System.out.println("number of operators: " + nop);
             List<List<Operator>> operatorPermutations = kTuples(nop, POPULAR_OPERATORS);
             System.out.println("Number of operator perms: " + operatorPermutations.size());

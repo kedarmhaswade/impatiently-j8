@@ -4,8 +4,6 @@ import org.junit.*;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 public class FuzlurTest {
 
     @Test
