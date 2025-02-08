@@ -1,11 +1,16 @@
 package practice;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.range;
 import static practice.Arity.BINARY;
 import static practice.Arity.UNARY;
 import static practice.Operator.*;
-import static practice.Permutations.*;
+import static practice.Permutations.kTuples;
+import static practice.Permutations.nPk;
 
 enum Arity {
     UNARY,
@@ -90,15 +95,9 @@ public class Fazlur {
     private final List<List<Object>> operandPermutations = new ArrayList<>();
 
     public static void main(String[] args) {
-//        new Fazlur().solve(6, List.of(2, 2, 2));
-//        new Fazlur().solve(6, List.of(3, 3, 3));
-//        new Fazlur().solve(6, List.of(4, 4, 4));
-//        new Fazlur().solve(6, List.of(5, 5, 5));
-//        new Fazlur().solve(6, List.of(6, 6, 6));
-//        new Fazlur().solve(6, List.of(7, 7, 7));
-        new Fazlur().solve(6, List.of(8, 8, 8));
-        new Fazlur().solve(6, List.of(9, 9, 9));
-//        new Fazlur().solve(24, List.of(1, 3, 4, 6));
+//      new Fazlur().solve(24, List.of(1, 3, 4, 6));
+        System.out.println("Usage: " + Fazlur.class.getSimpleName() + "[expected answer] operand-1, operand-2, ...");
+        new Fazlur().solve(Integer.parseInt(args[0]), range(1, args.length).map(i -> Integer.parseInt(args[i])).boxed().collect(toList()));
     }
 
     /*
