@@ -2,9 +2,9 @@ package practice;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 public class DecimallyOrderedNumbers2 {
     public static final char PLUS = '+';
@@ -39,14 +39,6 @@ public class DecimallyOrderedNumbers2 {
     public static void main(String[] args) {
         eval(1, "1", 1);
         System.out.println("Number of numbers that have this representations: " + map.size());
-        for (long i = -333; i <= 123_456_789; i++) {
-            if (!map.containsKey(i)) {
-//                System.out.println("Wow! No representation for: " + i);
-            }
-            else {
-                List<String> reps = map.get(i);
-                System.out.println(i + " (" + reps.size() + " representations): "  + reps);
-            }
-        }
+        map.keySet().stream().sorted().forEach(e -> System.out.println(e + " (" + map.get(e).size() + ") = " + map.get(e)));
     }
 }
